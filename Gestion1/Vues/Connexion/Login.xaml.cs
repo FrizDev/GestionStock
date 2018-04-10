@@ -37,8 +37,8 @@ namespace Gestion1.Vues.Connexion
                 string query = "SELECT COUNT (1) FROM Utilisateurs WHERE Identifiant=@identifiant AND Motdepasse=@motdepasse"; // Reqûete pour vérifier les informations de l'utilisateur
                 SqlCommand sqlcommand = new SqlCommand(query, sqlconnection);
                 sqlcommand.CommandType = System.Data.CommandType.Text;
-                sqlcommand.Parameters.AddWithValue("@identifiant", textbox_identifiant.Text);
-                sqlcommand.Parameters.AddWithValue("@motdepasse", passwordbox_identifiant.Password);
+                sqlcommand.Parameters.AddWithValue("@identifiant", TextboxIdentifiant.Text);
+                sqlcommand.Parameters.AddWithValue("@motdepasse", PasswordBoxIdentifiant.Password);
                 int count = Convert.ToInt32(sqlcommand.ExecuteScalar()); // Variable count qui stocke le nombre de résultat suite à la requête
                 if (count == 1) // Si le résultat = 1
                 {

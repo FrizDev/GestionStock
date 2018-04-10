@@ -82,26 +82,36 @@ namespace Gestion1.Vues.Tableaudebord
         private void MenuHome_OnClick(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Content = new Menu.Accueil.Accueil(); // La page Accueil devient le contenu de la frame MainFrame
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
 
         private void MenuStock_OnClick(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Content = new Menu.Stock.Stock(); // La page Stock devient le contenu de la frame MainFrame
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
 
         private void MenuVente_OnClick(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Content = new Menu.Vente.Vente(); // La page Vente devient le contenu de la frame MainFrame
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
 
         private void MenuClient_OnClick(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Content = new Menu.Client.Client(); // La page Client devient le contenu de la frame MainFrame
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
 
         private void MenuStatistiques_OnClick(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Content = new Menu.Statistiques.Statistiques(); // La page Statistiques devient le contenu de la frame MainFrame
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
         #endregion
     }

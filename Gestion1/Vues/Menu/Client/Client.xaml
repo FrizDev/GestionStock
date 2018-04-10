@@ -7,12 +7,42 @@
       mc:Ignorable="d" 
       Height="860"
       Width="1540"
-      Title="Client">
+      Title="Client"
+      Background="White">
 
     <Grid>
-        <TextBlock Text="Client"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Grid Height="100"
+              Background="Transparent"
+              VerticalAlignment="Top"
+              Margin="200 80 0 0">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonAjouter"
+            Content="Ajouter"
+            Height="60"
+            Width="Auto"
+            BorderBrush="{x:Null}"
+            FontSize="20"
+            FontFamily="Segoe UI Light"
+            Click="ButtonAjouter_OnClick"/>
+                <Button x:Name="ButtonEffacer"
+            Content="Effacer"
+            Height="60"
+            Width="Auto"
+            Margin="10 0 0 0"
+            BorderBrush="{x:Null}"
+            FontSize="20"
+            FontFamily="Segoe UI Light"
+            Click="ButtonEffacer_OnClick"/>
+                <Button x:Name="ButtonModifier"
+            Content="Modifier"
+            Height="60"
+            Width="Auto"
+            Margin="10 0 0 0"
+            BorderBrush="{x:Null}"
+            FontSize="20"
+            FontFamily="Segoe UI Light"
+            Click="ButtonModifier_OnClick"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

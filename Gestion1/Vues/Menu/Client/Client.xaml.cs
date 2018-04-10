@@ -24,5 +24,20 @@ namespace Gestion1.Vues.Menu.Client
         {
             InitializeComponent();
         }
+
+        private void ButtonAjouter_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonEffacer_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonModifier_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

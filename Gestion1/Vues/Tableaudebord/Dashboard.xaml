@@ -36,6 +36,9 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
+        <EventTrigger RoutedEvent="ListViewItem.PreviewMouseLeftButtonUp" SourceName="ListViewMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
     </Window.Triggers>
     <!--Endregion -->
     <Grid>
