@@ -12,10 +12,11 @@
 
     <Grid>
         <Grid Height="100"
-              Background="Transparent"
+              Background="Red"
               VerticalAlignment="Top"
               Margin="20 60 0 0">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        Margin="5 0 0 0">
                 <Button x:Name="ButtonAjouter"
             Content="Ajouter"
             Height="60"
@@ -43,6 +44,12 @@
             FontFamily="Segoe UI Light"
             Click="ButtonModifier_OnClick"/>
             </StackPanel>
+        </Grid>
+        <Grid Height="600"
+              VerticalAlignment="Bottom"
+              Margin="20 0 0 40"
+              Background="Blue">
+            <DataGrid x:Name="DataGridClient"/>
         </Grid>
     </Grid>
 </Page>

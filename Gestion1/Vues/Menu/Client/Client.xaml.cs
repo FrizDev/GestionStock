@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,10 @@ namespace Gestion1.Vues.Menu.Client
         public Client()
         {
             InitializeComponent();
+            FillDataGrid();
         }
+
+        #region Bouton Gestion du tableau Client
 
         private void ButtonAjouter_OnClick(object sender, RoutedEventArgs e)
         {
@@ -39,5 +44,25 @@ namespace Gestion1.Vues.Menu.Client
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Remplissage tableau Client
+
+        private void FillDataGrid()
+        {
+            string ConString = "Server=den1.mssql6.gear.host;Database=stock4;Uid=stock4;Pwd=gestionstock*";
+            string CmdString = string.Empty;
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                CmdString = "SELECT emp_id, fname, lname, hire_date FROM Employee";
+                SqlCommand cmd = new SqlCommand(CmdString, con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable("Employee");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+        }
+        #endregion
     }
 }
