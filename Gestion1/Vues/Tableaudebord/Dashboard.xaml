@@ -3,10 +3,224 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Gestion1.Vues.Tableaudebord"
         mc:Ignorable="d"
-        Title="Dashboard" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="Tableau de bord"
+        Height="900"
+        Width="1600">
+    <!-- Region Animation menu latéral gauche-->
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="230"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <!--Endregion -->
     <Grid>
-        
+        <!-- Grid principale -->
+        <!--Region Grid avec le contenu -->
+        <Grid x:Name="GridContenu"
+              Height="708"
+              Width="964"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Background="Transparent">
+            <Frame x:Name="MainFrame"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+        <!--Endregion -->
+        <!--Region Grid Gestion de la fenêtre -->
+        <Grid x:Name="GridWindow"
+              Height="60"
+              VerticalAlignment="Top"
+              Background="#0091EA"
+              MouseDown="GridWindow_OnMouseDown">
+            <TextBlock Text=""
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="22"/>
+            <Button x:Name="ButtonCloseWindow"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="Auto"
+                Height="Auto"
+                Margin="10"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Click="ButtonCloseWindow_OnClick">
+                <materialDesign:PackIcon Kind="Close"
+                                     Width="25"
+                                     Height="25"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+            </Button>
+            <Button x:Name="ButtonMinimizeWindow"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="Auto"
+                Height="Auto"
+                Margin="10,10,60,10"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Click="ButtonMinimizeWindow_OnClick">
+                <materialDesign:PackIcon Kind="WindowMinimize"
+                                     Width="25"
+                                     Height="25"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+            </Button>
+            <materialDesign:PopupBox HorizontalAlignment="Right"
+                                     Height="25"
+                                     Width="25"
+                                     Margin="10,10,160,10"
+                                     PlacementMode="BottomAndAlignRightEdges"
+                                     StaysOpen="False"
+                                     Foreground="White">
+                <StackPanel Width="150">
+                    <Button Content="Compte"/>
+                    <Button Content="Aide"/>
+                    <Separator/>
+                    <Button x:Name="ButtonPopUpLogout" Content="Déconnexion" Click="ButtonPopUpLogout_OnClick"/>
+                    <Separator/>
+                    <Button x:Name="ButtonPopUpAbout" Content="A propos" Click="ButtonPopUpAbout_OnClick"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+
+        </Grid>
+        <!--Endregion-->
+        <!--Region Grid Gestion du menu latéral gauche-->
+        <Grid x:Name="GridMenu"
+          Width="60"
+          HorizontalAlignment="Left"
+          Background="#FF222222">
+            <StackPanel>
+                <Grid Height="60"
+                  Background="#0091EA">
+                    <Button x:Name="ButtonCloseMenu"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Width="60"
+                        Height="60"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        Visibility="Collapsed"
+                        Click="ButtonCloseMenu_OnClick">
+                        <materialDesign:PackIcon Kind="ArrowLeft"
+                                             Width="25"
+                                             Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Width="60" 
+                        Height="60" 
+                        Background="{x:Null}" 
+                        BorderBrush="{x:Null}"
+                        Click="ButtonOpenMenu_OnClick">
+                        <materialDesign:PackIcon Kind="Menu"
+                                             Width="25"
+                                             Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView x:Name="ListViewMenu" 
+                      Foreground="Black"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListViewItem Height="60" 
+                              PreviewMouseLeftButtonUp="MenuHome_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard"
+                                                 Width="25"
+                                                 Height="25"
+                                                 Margin="10"
+                                                 VerticalAlignment="Center"
+                                                 Foreground="White"/>
+                            <TextBlock Text="Accueil"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"
+                                   Margin="20 10"
+                                   Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60"
+                              PreviewMouseLeftButtonUp="MenuClient_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account"
+                                                 Width="25"
+                                                 Height="25"
+                                                 Margin="10"
+                                                 VerticalAlignment="Center"
+                                                 Foreground="White"/>
+                            <TextBlock Text="Gestion des clients" 
+                                   FontSize="15" 
+                                   VerticalAlignment="Center"
+                                   Margin="20 10" 
+                                   Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60"
+                              PreviewMouseLeftButtonUp="MenuStock_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Archive"
+                                                 Width="25"
+                                                 Height="25"
+                                                 Margin="10"
+                                                 VerticalAlignment="Center" 
+                                                 Foreground="White"/>
+                            <TextBlock Text="Gestion du stock"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"
+                                   Margin="20 10"
+                                   Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" 
+                              PreviewMouseLeftButtonUp="MenuVente_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CurrencyEur" 
+                                                 Width="25" 
+                                                 Height="25"
+                                                 Margin="10" 
+                                                 VerticalAlignment="Center" 
+                                                 Foreground="White"/>
+                            <TextBlock Text="Gestion des ventes" FontSize="15" VerticalAlignment="Center" Margin="20 10" Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" 
+                              PreviewMouseLeftButtonUp="MenuStatistiques_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ChartAreaspline" 
+                                                 Width="25" 
+                                                 Height="25"
+                                                 Margin="10" 
+                                                 VerticalAlignment="Center" 
+                                                 Foreground="White"/>
+                            <TextBlock Text="Statistiques" FontSize="15" VerticalAlignment="Center" Margin="20 10" Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <!--Endregion-->
     </Grid>
 </Window>
