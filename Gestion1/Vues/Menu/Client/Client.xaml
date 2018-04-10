@@ -14,7 +14,7 @@
         <Grid Height="100"
               Background="Transparent"
               VerticalAlignment="Top"
-              Margin="200 80 0 0">
+              Margin="20 60 0 0">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonAjouter"
             Content="Ajouter"
