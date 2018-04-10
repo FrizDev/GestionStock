@@ -11,7 +11,8 @@
         WindowStyle="None"
         Title="Tableau de bord"
         Height="900"
-        Width="1600">
+        Width="1600"
+        Loaded="Dashboard_OnLoaded">
     <!-- Region Animation menu latéral gauche-->
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
@@ -41,8 +42,8 @@
         <!-- Grid principale -->
         <!--Region Grid avec le contenu -->
         <Grid x:Name="GridContenu"
-              Height="708"
-              Width="964"
+              Height="860"
+              Width="1540"
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
               Background="Transparent">

@@ -25,6 +25,13 @@ namespace Gestion1.Vues.Tableaudebord
             InitializeComponent();
         }
 
+        #region Chargement de la fenêtre
+        private void Dashboard_OnLoaded(object sender, RoutedEventArgs e) // Action au chargement de la fenêtre
+        {
+            MainFrame.Content = new Menu.Accueil.Accueil(); // La page Accueil devient le contenu de la frame MainFrame
+        }
+        #endregion
+
         #region Gestion de la fenêtre
         private void GridWindow_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -56,7 +63,6 @@ namespace Gestion1.Vues.Tableaudebord
             MessageBox.Show("Application développée dans le cadre de l'épreuve E4, par Gabin LONGONI"); // Affichage message à propos
         }
         #endregion
-
 
         #region Gestion du menu latéral droit
         private void ButtonOpenMenu_OnClick(object sender, RoutedEventArgs e) // Ouverture du menu latéral gauche
