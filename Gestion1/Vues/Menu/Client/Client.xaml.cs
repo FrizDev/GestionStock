@@ -55,10 +55,10 @@ namespace Gestion1.Vues.Menu.Client
             string CmdString = string.Empty;
             using (SqlConnection con = new SqlConnection(ConString))
             {
-                CmdString = "SELECT emp_id, fname, lname, hire_date FROM Employee";
+                CmdString = "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients";
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable("Employee");
+                DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
             }

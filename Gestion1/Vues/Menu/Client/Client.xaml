@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Gestion1.Vues.Menu.Client"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       Height="860"
       Width="1540"
@@ -12,7 +13,6 @@
 
     <Grid>
         <Grid Height="100"
-              Background="Red"
               VerticalAlignment="Top"
               Margin="20 60 0 0">
             <StackPanel Orientation="Horizontal"
@@ -43,13 +43,79 @@
             FontSize="20"
             FontFamily="Segoe UI Light"
             Click="ButtonModifier_OnClick"/>
+                <Button x:Name="ButtonRecherche"
+                        Height="60"
+                        Width="400"
+                        Margin="700,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="SearchWeb"
+                                             HorizontalAlignment="Left"
+                                             Height="30"
+                                             Width="35"
+                                             Margin="0,0,100,0"/>
+                        <TextBox x:Name="TextBoxRecherche"
+                             materialDesign:HintAssist.Hint="Rechercher"
+                                 Width="300"
+                                 FontSize="20"
+                                 Margin="0,0,50,0"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
-        <Grid Height="600"
+        <Grid Height="500"
+              Width="600"
               VerticalAlignment="Bottom"
-              Margin="20 0 0 40"
-              Background="Blue">
+              HorizontalAlignment="Right"
+              Margin="0,0,20,200">
             <DataGrid x:Name="DataGridClient"/>
+        </Grid>
+        <Grid Height="500"
+              Width="600"
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left"
+              Margin="40,0,0,200">
+            <StackPanel>
+                <TextBox x:Name="TextBoxNom"
+                         materialDesign:HintAssist.Hint="Nom"
+                         Height="Auto"
+                         Width="100"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"/>
+                <TextBox x:Name="TextBoxPrenom"
+                         materialDesign:HintAssist.Hint="Prenom"
+                         Height="Auto"
+                         Width="100"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"/>
+                <TextBox x:Name="TextBoxSociete"
+                         materialDesign:HintAssist.Hint="Societe"
+                         Height="Auto"
+                         Width="100"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"/>
+                <TextBox x:Name="TextBoxTelephone"
+                         materialDesign:HintAssist.Hint="Téléphone"
+                         Height="Auto"
+                         Width="100"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"/>
+                <TextBox x:Name="TextBoxEmail"
+                         materialDesign:HintAssist.Hint="Email"
+                         Height="Auto"
+                         Width="100"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
