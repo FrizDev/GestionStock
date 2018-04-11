@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestion1.Vues.Menu.Client
 {
@@ -28,51 +17,32 @@ namespace Gestion1.Vues.Menu.Client
             FillDataGrid();
         }
 
-        private const string ConString = "Server=den1.mssql6.gear.host;Database=stock4;Uid=stock4;Pwd=gestionstock*";
+        #region Chaine de connexion à la base de données SQL Server
+
+        private const string ConString = "Server=den1.mssql6.gear.host;Database=stock4;Uid=stock4;Pwd=gestionstock*"; // Chaine de connexion à la base SQL Server
+
+        #endregion
 
         #region Bouton Gestion du tableau Client
 
         private void ButtonAjouter_OnClick(object sender, RoutedEventArgs e)
         {
             if (TextBoxNom.Text != "" & TextBoxPrenom.Text != "" & TextBoxSociete.Text != "" &
-                TextBoxTelephone.Text != "" & TextBoxEmail.Text != "")
+                TextBoxTelephone.Text != "" & TextBoxEmail.Text != "") // Si les champs ne sont pas vides, la création est impossible
             {
-                using (SqlConnection connection = new SqlConnection(ConString))
-                {
-                    using (SqlCommand command = new SqlCommand())
-                    {
-                        command.Connection = connection;
-                        command.CommandType = CommandType.Text;
-                        command.CommandText = "INSERT INTO dbo.Clients(Nom,Prenom,Societe,Telephone,Email) Values(@Nom, @Prenom, @Societe, @Telephone, @Email)";
-                        command.Parameters.AddWithValue("@Nom", TextBoxNom.Text);
-                        command.Parameters.AddWithValue("@Prenom", TextBoxPrenom.Text);
-                        command.Parameters.AddWithValue("@Societe", TextBoxSociete.Text);
-                        command.Parameters.AddWithValue("@Telephone", TextBoxTelephone.Text);
-                        command.Parameters.AddWithValue("@Email", TextBoxEmail.Text);
-                    }
+                SqlConnection connection = new SqlConnection(ConString);
+                connection.Open(); // Ouvertue de la connexion
 
-                    try
-                    {
-                        connection.Open();
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show(exception.ToString());
-                        throw;
-                    }
-                    finally
-                    {
-                        connection.Close();
-                        MessageBox.Show("Valeurs ajoutées avec succès");
-                        TextBoxNom.Clear();
-                        TextBoxPrenom.Clear();
-                        TextBoxSociete.Clear();
-                        TextBoxTelephone.Clear();
-                        TextBoxEmail.Clear();
-                    }
-                }
+                SqlCommand cmdSqlCommand = new SqlCommand("INSERT INTO dbo.Clients(Nom,Prenom,Societe,Telephone,Email) Values(@Nom, @Prenom, @Societe, @Telephone, @Email)", connection); // Requête d'insertion d'un nouveau client
 
-
+                cmdSqlCommand.Parameters.AddWithValue("@Nom", TextBoxNom.Text); // Paramètre du Nom du client
+                cmdSqlCommand.Parameters.AddWithValue("@Prenom", TextBoxPrenom.Text); // Paramètre du Prenom du client
+                cmdSqlCommand.Parameters.AddWithValue("@Societe", TextBoxSociete.Text); // Paramètre de la Societe du client
+                cmdSqlCommand.Parameters.AddWithValue("@Telephone", TextBoxTelephone.Text); // Paramètre du numéro de Telephone du client
+                cmdSqlCommand.Parameters.AddWithValue("@Email", TextBoxEmail.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
+                MessageBox.Show(""); // Affichage du message après execution de la requête
+                connection.Close(); // Fermeture de la connexion
             }
         }
 
@@ -95,12 +65,12 @@ namespace Gestion1.Vues.Menu.Client
             string CmdString = string.Empty;
             using (SqlConnection con = new SqlConnection(ConString))
             {
-                CmdString = "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients";
+                CmdString = "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Clients
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Clients");
-                sda.Fill(dt);
-                DataGridClient.ItemsSource = dt.DefaultView;
+                sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Clients
+                DataGridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
             }
         }
         #endregion
