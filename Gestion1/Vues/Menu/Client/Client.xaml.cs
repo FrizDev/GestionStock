@@ -173,6 +173,15 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Clients
                 DataGridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " clients trouvés";
+                }
+                else
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " client trouvé";
+                }
             }
         }
 

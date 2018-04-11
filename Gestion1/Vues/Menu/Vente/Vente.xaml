@@ -7,12 +7,10 @@
       mc:Ignorable="d" 
       Height="860"
       Width="1540"
-      Title="Vente">
+      Title="Vente"
+      Background="White">
 
     <Grid>
-        <TextBlock Text="Vente"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+
     </Grid>
 </Page>

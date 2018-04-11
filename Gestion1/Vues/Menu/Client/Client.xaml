@@ -85,10 +85,18 @@
               HorizontalAlignment="Right"
               Margin="0,0,20,0">
             <DataGrid x:Name="DataGridClient"
-                      Height="Auto"
+                      Height="600"
                       IsReadOnly="True"
                       SelectionMode="Single"
-                      SelectionChanged="DataGridClient_OnSelectionChanged"/>
+                      SelectionChanged="DataGridClient_OnSelectionChanged"
+                      Background="Transparent"/>
+            <TextBlock x:Name="TextBlockTotal"
+                       Text=""
+                       FontSize="20"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,0,15"/>
         </Grid>
         <Grid Height="450"
               Width="350"
