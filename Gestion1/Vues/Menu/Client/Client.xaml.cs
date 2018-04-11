@@ -74,5 +74,63 @@ namespace Gestion1.Vues.Menu.Client
             }
         }
         #endregion
+
+        private void TextBoxRecherche_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ComboBoxCategorie.Text == "Nom")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Clients");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+
+            else if (ComboBoxCategorie.Text == "Prenom")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Clients");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+
+            else if (ComboBoxCategorie.Text == "Societe")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Clients");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+
+            else if (ComboBoxCategorie.Text == "Telephone")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Clients");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+
+            else if (ComboBoxCategorie.Text == "Email")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Clients");
+                sda.Fill(dt);
+                DataGridClient.ItemsSource = dt.DefaultView;
+            }
+        }
     }
 }

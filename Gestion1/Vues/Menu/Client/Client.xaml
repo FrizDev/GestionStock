@@ -73,7 +73,8 @@
                          HorizontalAlignment="Right"
                          FontSize="20"
                          FontFamily="Segoe UI"
-                         materialDesign:HintAssist.Hint="Rechercher"/>
+                         materialDesign:HintAssist.Hint="Rechercher"
+                         TextChanged="TextBoxRecherche_OnTextChanged"/>
             </StackPanel>
         </Grid>
         <Grid Height="500"
