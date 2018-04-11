@@ -30,9 +30,9 @@ namespace Gestion1.Vues.Menu.Client
         private void DataGridClient_OnSelectionChanged(object sender, SelectionChangedEventArgs e) // Affichage des données de la table Clients dans les Textbox
         {
             DataGrid gd = (DataGrid)sender;
-            DataRowView rowSelected = gd.SelectedItem as DataRowView;
-            if (rowSelected != null)
+            if (gd.SelectedItem is DataRowView rowSelected)
             {
+                TextBoxId.Text = rowSelected["Id"].ToString();
                 TextBoxNom.Text = rowSelected["Nom"].ToString();
                 TextBoxPrenom.Text = rowSelected["Prenom"].ToString();
                 TextBoxSociete.Text = rowSelected["Societe"].ToString();
@@ -67,7 +67,7 @@ namespace Gestion1.Vues.Menu.Client
                     TextBoxTelephone.Text); // Paramètre du numéro de Telephone du client
                 cmdSqlCommand.Parameters.AddWithValue("@Email", TextBoxEmail.Text); // Paramètre de l'Email du client
                 cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
-                MessageBox.Show(""); // Affichage du message après execution de la requête
+                MessageBox.Show("Le client " + TextBoxNom.Text + " " + TextBoxPrenom.Text + " " + "de la société " + TextBoxSociete.Text + " a été créé"); // Affichage du message après execution de la requête
                 FillDataGrid(); // Recharge la table Clients
                 TextBoxNom.Clear(); // Vide le champs Nom
                 TextBoxPrenom.Clear(); // Vide le champs Prenom
@@ -80,16 +80,50 @@ namespace Gestion1.Vues.Menu.Client
 
         private void ButtonEffacer_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         private void ButtonModifier_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (TextBoxId.Text != "" & TextBoxNom.Text != "" & TextBoxPrenom.Text != "" & TextBoxSociete.Text != "" &
+                TextBoxTelephone.Text != "" & TextBoxEmail.Text != "") // Si les champs ne sont pas vides, la modification est impossible
+            {
+                SqlConnection connection = new SqlConnection(ConString);
+                connection.Open(); // Ouvertue de la connexion
+
+                SqlCommand cmdSqlCommand =
+                    new SqlCommand(
+                        "UPDATE dbo.Clients SET Nom=@Nom, Prenom=@Prenom ,Societe=@Societe, Telephone=@Telephone, Email=@Email WHERE Id=@Id"
+                        , connection); // Requête d'insertion d'un nouveau client
+                cmdSqlCommand.Parameters.AddWithValue("@Id", TextBoxId.Text); // Paramètre de l'ID du client
+                cmdSqlCommand.Parameters.AddWithValue("@Nom", TextBoxNom.Text); // Paramètre du Nom du client
+                cmdSqlCommand.Parameters.AddWithValue("@Prenom", TextBoxPrenom.Text); // Paramètre du Prenom du client
+                cmdSqlCommand.Parameters.AddWithValue("@Societe", TextBoxSociete.Text); // Paramètre de la Societe du client
+                cmdSqlCommand.Parameters.AddWithValue("@Telephone", TextBoxTelephone.Text); // Paramètre du numéro de Telephone du client
+                cmdSqlCommand.Parameters.AddWithValue("@Email", TextBoxEmail.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
+                int rows = cmdSqlCommand.ExecuteNonQuery(); // Variable qui stocke le nombre de requêtes effectuées
+                if (rows > 1)
+                {
+                    MessageBox.Show(rows + " requêtes ont bien été effectuées"); // Affichage du message après execution de la requête (dans le cas où il y en a plusieurs)
+                }
+                else
+                {
+                    MessageBox.Show(rows + " requête a bien été effectuée"); // Affichage du message après execution de la requête (dans le cas où il n'y en a qu'une seule)
+                }
+                FillDataGrid(); // Recharge la table Clients
+                TextBoxNom.Clear(); // Vide le champs Nom
+                TextBoxPrenom.Clear(); // Vide le champs Prenom
+                TextBoxSociete.Clear(); // Vide le champs Societe
+                TextBoxTelephone.Clear(); // Vide le champs Telephone
+                TextBoxEmail.Clear(); // Vide le champs Email
+                connection.Close(); // Fermeture de la connexion
+            }
         }
 
         private void ButtonRaz_OnClick(object sender, RoutedEventArgs e)
         {
+            TextBoxId.Clear(); // Vide le champs ID
             TextBoxNom.Clear(); // Vide le champs Nom
             TextBoxPrenom.Clear(); // Vide le champs Prenom
             TextBoxSociete.Clear(); // Vide le champs Societe
@@ -107,7 +141,7 @@ namespace Gestion1.Vues.Menu.Client
             using (SqlConnection con = new SqlConnection(ConString))
             {
                 CmdString =
-                    "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Clients
+                    "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Clients
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Clients");
@@ -126,7 +160,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -137,7 +171,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -148,7 +182,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -159,7 +193,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -170,7 +204,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);

@@ -51,7 +51,7 @@
               Width="600"
               VerticalAlignment="Top"
               HorizontalAlignment="Right"
-              Margin="0 60 20 0">
+              Margin="0 60 150 0">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center">
                 <ComboBox x:Name="ComboBoxCategorie"
@@ -77,14 +77,15 @@
                          TextChanged="TextBoxRecherche_OnTextChanged"/>
             </StackPanel>
         </Grid>
-        <Grid Height="500"
-              Width="600"
+        <Grid Height="700"
+              Width="850"
               VerticalAlignment="Bottom"
               HorizontalAlignment="Right"
-              Margin="0,0,20,200">
+              Margin="0,0,20,0">
             <DataGrid x:Name="DataGridClient"
                       Height="Auto"
                       IsReadOnly="True"
+                      SelectionMode="Single"
                       SelectionChanged="DataGridClient_OnSelectionChanged"/>
         </Grid>
         <Grid Height="450"
@@ -93,6 +94,15 @@
               HorizontalAlignment="Left"
               Margin="40,0,0,250">
             <StackPanel>
+                <TextBox x:Name="TextBoxId"
+                         materialDesign:HintAssist.Hint="ID"
+                         Height="Auto"
+                         Width="50"
+                         HorizontalAlignment="Left"
+                         Margin="0 15"
+                         FontSize="17"
+                         FontFamily="Segoe UI"
+                         IsReadOnly="True"/>
                 <TextBox x:Name="TextBoxNom"
                          materialDesign:HintAssist.Hint="Nom"
                          Height="Auto"
@@ -120,7 +130,7 @@
                 <TextBox x:Name="TextBoxTelephone"
                          materialDesign:HintAssist.Hint="Téléphone"
                          Height="Auto"
-                         Width="150"
+                         Width="100"
                          HorizontalAlignment="Left"
                          Margin="0 15"
                          FontSize="17"
@@ -128,7 +138,7 @@
                 <TextBox x:Name="TextBoxEmail"
                          materialDesign:HintAssist.Hint="Email"
                          Height="Auto"
-                         Width="200"
+                         Width="Auto"
                          HorizontalAlignment="Left"
                          Margin="0 15"
                          FontSize="17"
@@ -143,6 +153,6 @@
                     FontSize="20"
                     FontFamily="Segoe UI Light"
                     Click="ButtonRaz_OnClick"/>
-            </Grid>
         </Grid>
+    </Grid>
 </Page>
