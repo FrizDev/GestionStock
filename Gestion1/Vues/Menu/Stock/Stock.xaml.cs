@@ -38,7 +38,15 @@ namespace Gestion1.Vues.Menu.Stock
 
         private void DataGridStock_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            DataGrid gd = (DataGrid)sender;
+            if (gd.SelectedItem is DataRowView rowSelected)
+            {
+                TextBoxCodeProduit.Text = rowSelected["CodeProduit"].ToString();
+                TextBoxNomProduit.Text = rowSelected["NomProduit"].ToString();
+                TextBoxQuantite.Text = rowSelected["Quantite"].ToString();
+                ComboBoxEtat.Text = rowSelected["Etat"].ToString();
+                DatePickerStock.Text = rowSelected["DateAjout"].ToString();
+            }
         }
 
         private void FillDataGrid()

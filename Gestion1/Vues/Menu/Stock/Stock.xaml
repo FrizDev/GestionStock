@@ -42,7 +42,7 @@
                          materialDesign:HintAssist.Hint="Code produit"
                          FontSize="17"
                          FontFamily="Segoe UI light"/>
-                <ComboBox Height="35"
+                <ComboBox x:Name="ComboBoxEtat" Height="35"
                           Width="100"
                           Margin="30 0 0 0"
                           FontSize="17"
