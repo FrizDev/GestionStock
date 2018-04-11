@@ -60,8 +60,11 @@
                           HorizontalAlignment="Left"
                           FontSize="20"
                           FontFamily="Segoe UI">
-                    <ComboBoxItem>Test 1</ComboBoxItem>
-                    <ComboBoxItem>Test 2</ComboBoxItem>
+                    <ComboBoxItem>Nom</ComboBoxItem>
+                    <ComboBoxItem>Prenom</ComboBoxItem>
+                    <ComboBoxItem>Societe</ComboBoxItem>
+                    <ComboBoxItem>Téléphone</ComboBoxItem>
+                    <ComboBoxItem>Email</ComboBoxItem>
                 </ComboBox>
                 <TextBox x:Name="TextBoxRecherche"
                          Height="40"
