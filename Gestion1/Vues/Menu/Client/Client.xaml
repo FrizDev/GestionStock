@@ -13,53 +13,64 @@
 
     <Grid>
         <Grid Height="100"
+              Width="350"
               VerticalAlignment="Top"
+              HorizontalAlignment="Left"
               Margin="20 60 0 0">
             <StackPanel Orientation="Horizontal"
                         Margin="5 0 0 0">
                 <Button x:Name="ButtonAjouter"
-            Content="Ajouter"
-            Height="60"
-            Width="Auto"
-            BorderBrush="{x:Null}"
-            FontSize="20"
-            FontFamily="Segoe UI Light"
-            Click="ButtonAjouter_OnClick"/>
-                <Button x:Name="ButtonEffacer"
-            Content="Effacer"
-            Height="60"
-            Width="Auto"
-            Margin="10 0 0 0"
-            BorderBrush="{x:Null}"
-            FontSize="20"
-            FontFamily="Segoe UI Light"
-            Click="ButtonEffacer_OnClick"/>
-                <Button x:Name="ButtonModifier"
-            Content="Modifier"
-            Height="60"
-            Width="Auto"
-            Margin="10 0 0 0"
-            BorderBrush="{x:Null}"
-            FontSize="20"
-            FontFamily="Segoe UI Light"
-            Click="ButtonModifier_OnClick"/>
-                <Button x:Name="ButtonRecherche"
+                        Content="Ajouter"
                         Height="60"
-                        Width="400"
-                        Margin="700,0,0,0">
-                    <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="SearchWeb"
-                                             HorizontalAlignment="Left"
-                                             Height="30"
-                                             Width="35"
-                                             Margin="0,0,100,0"/>
-                        <TextBox x:Name="TextBoxRecherche"
-                             materialDesign:HintAssist.Hint="Rechercher"
-                                 Width="300"
-                                 FontSize="20"
-                                 Margin="0,0,50,0"/>
-                    </StackPanel>
-                </Button>
+                        Width="Auto"
+                        BorderBrush="{x:Null}"
+                        FontSize="20"
+                        FontFamily="Segoe UI Light"
+                        Click="ButtonAjouter_OnClick"/>
+                <Button x:Name="ButtonEffacer"
+                        Content="Effacer"
+                        Height="60"
+                        Width="Auto"
+                        Margin="10 0 0 0"
+                        BorderBrush="{x:Null}"
+                        FontSize="20"
+                        FontFamily="Segoe UI Light"
+                        Click="ButtonEffacer_OnClick"/>
+                <Button x:Name="ButtonModifier"
+                        Content="Modifier"
+                        Height="60"
+                        Width="Auto"
+                        Margin="10 0 0 0"
+                        BorderBrush="{x:Null}"
+                        FontSize="20"
+                        FontFamily="Segoe UI Light"
+                        Click="ButtonModifier_OnClick"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height="100"
+              Width="600"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Right"
+              Margin="0 60 20 0">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                <ComboBox x:Name="ComboBoxCategorie"
+                          Height="40"
+                          Width="280"
+                          HorizontalAlignment="Left"
+                          FontSize="20"
+                          FontFamily="Segoe UI">
+                    <ComboBoxItem>Test 1</ComboBoxItem>
+                    <ComboBoxItem>Test 2</ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="TextBoxRecherche"
+                         Height="40"
+                         Width="280"
+                         Margin="40,0,0,0"
+                         HorizontalAlignment="Right"
+                         FontSize="20"
+                         FontFamily="Segoe UI"
+                         materialDesign:HintAssist.Hint="Rechercher"/>
             </StackPanel>
         </Grid>
         <Grid Height="500"

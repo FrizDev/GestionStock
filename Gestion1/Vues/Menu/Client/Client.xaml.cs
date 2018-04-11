@@ -28,11 +28,52 @@ namespace Gestion1.Vues.Menu.Client
             FillDataGrid();
         }
 
+        private const string ConString = "Server=den1.mssql6.gear.host;Database=stock4;Uid=stock4;Pwd=gestionstock*";
+
         #region Bouton Gestion du tableau Client
 
         private void ButtonAjouter_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (TextBoxNom.Text != "" & TextBoxPrenom.Text != "" & TextBoxSociete.Text != "" &
+                TextBoxTelephone.Text != "" & TextBoxEmail.Text != "")
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = "INSERT INTO dbo.Clients(Nom,Prenom,Societe,Telephone,Email) Values(@Nom, @Prenom, @Societe, @Telephone, @Email)";
+                        command.Parameters.AddWithValue("@Nom", TextBoxNom.Text);
+                        command.Parameters.AddWithValue("@Prenom", TextBoxPrenom.Text);
+                        command.Parameters.AddWithValue("@Societe", TextBoxSociete.Text);
+                        command.Parameters.AddWithValue("@Telephone", TextBoxTelephone.Text);
+                        command.Parameters.AddWithValue("@Email", TextBoxEmail.Text);
+                    }
+
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.ToString());
+                        throw;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                        MessageBox.Show("Valeurs ajoutées avec succès");
+                        TextBoxNom.Clear();
+                        TextBoxPrenom.Clear();
+                        TextBoxSociete.Clear();
+                        TextBoxTelephone.Clear();
+                        TextBoxEmail.Clear();
+                    }
+                }
+
+
+            }
         }
 
         private void ButtonEffacer_OnClick(object sender, RoutedEventArgs e)
@@ -51,7 +92,6 @@ namespace Gestion1.Vues.Menu.Client
 
         private void FillDataGrid()
         {
-            string ConString = "Server=den1.mssql6.gear.host;Database=stock4;Uid=stock4;Pwd=gestionstock*";
             string CmdString = string.Empty;
             using (SqlConnection con = new SqlConnection(ConString))
             {
