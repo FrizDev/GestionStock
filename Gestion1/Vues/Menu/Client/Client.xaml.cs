@@ -80,7 +80,33 @@ namespace Gestion1.Vues.Menu.Client
 
         private void ButtonEffacer_OnClick(object sender, RoutedEventArgs e)
         {
+            if (TextBoxNom.Text != "" & TextBoxPrenom.Text != "" & TextBoxSociete.Text != "" &
+                TextBoxTelephone.Text != "" &
+                TextBoxEmail.Text != "") // Si les champs ne sont pas vides, la création est impossible
+            {
+                SqlConnection connection = new SqlConnection(ConString);
+                connection.Open(); // Ouvertue de la connexion
 
+                SqlCommand cmdSqlCommand =
+                    new SqlCommand(
+                        "DELETE FROM dbo.Clients WHERE Id=@Id",
+                        connection); // Requête de suppression du client
+                cmdSqlCommand.Parameters.AddWithValue("@Id", TextBoxId.Text); // Paramètre de l'Email du client
+                if (MessageBox.Show("Oui ou Non", "Êtes vous sûr de vouloir supprimer ce client?", MessageBoxButton.YesNo,
+                        MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
+                    MessageBox.Show("Le client " + TextBoxNom.Text + " " + TextBoxPrenom.Text + " " + "de la société " + TextBoxSociete.Text + " a été supprimé"); // Affichage du message après execution de la requête
+                }
+                FillDataGrid(); // Recharge la table Clients
+                TextBoxId.Clear();
+                TextBoxNom.Clear(); // Vide le champs Nom
+                TextBoxPrenom.Clear(); // Vide le champs Prenom
+                TextBoxSociete.Clear(); // Vide le champs Societe
+                TextBoxTelephone.Clear(); // Vide le champs Telephone
+                TextBoxEmail.Clear(); // Vide le champs Email
+                connection.Close(); // Fermeture de la connexion
+            }
         }
 
         private void ButtonModifier_OnClick(object sender, RoutedEventArgs e)

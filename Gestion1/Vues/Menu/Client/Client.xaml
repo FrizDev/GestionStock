@@ -13,10 +13,10 @@
 
     <Grid>
         <Grid Height="100"
-              Width="350"
+              Width="380"
               VerticalAlignment="Top"
               HorizontalAlignment="Left"
-              Margin="20 60 0 0">
+              Margin="100 60 0 0">
             <StackPanel Orientation="Horizontal"
                         Margin="5 0 0 0">
                 <Button x:Name="ButtonAjouter"
@@ -31,7 +31,7 @@
                         Content="Effacer"
                         Height="60"
                         Width="Auto"
-                        Margin="10 0 0 0"
+                        Margin="40 0 0 0"
                         BorderBrush="{x:Null}"
                         FontSize="20"
                         FontFamily="Segoe UI Light"
@@ -40,7 +40,7 @@
                         Content="Modifier"
                         Height="60"
                         Width="Auto"
-                        Margin="10 0 0 0"
+                        Margin="40 0 0 0"
                         BorderBrush="{x:Null}"
                         FontSize="20"
                         FontFamily="Segoe UI Light"
@@ -92,7 +92,7 @@
               Width="350"
               VerticalAlignment="Bottom"
               HorizontalAlignment="Left"
-              Margin="40,0,0,250">
+              Margin="120,0,0,250">
             <StackPanel>
                 <TextBox x:Name="TextBoxId"
                          materialDesign:HintAssist.Hint="ID"
