@@ -93,7 +93,7 @@ namespace Gestion1.Vues.Menu.Client
                         connection); // Requête de suppression du client
                 cmdSqlCommand.Parameters.AddWithValue("@Id", TextBoxId.Text); // Paramètre de l'Email du client
                 if (MessageBox.Show("Oui ou Non", "Êtes vous sûr de vouloir supprimer ce client?", MessageBoxButton.YesNo,
-                        MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        MessageBoxImage.Question) == MessageBoxResult.Yes) // Boite de dialogue demandant la confirmation pour la suppression du client
                 {
                     cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
                     MessageBox.Show("Le client " + TextBoxNom.Text + " " + TextBoxPrenom.Text + " " + "de la société " + TextBoxSociete.Text + " a été supprimé"); // Affichage du message après execution de la requête

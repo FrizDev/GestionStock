@@ -58,8 +58,10 @@
                           Height="40"
                           Width="280"
                           HorizontalAlignment="Left"
+                          IsEditable="True"
                           FontSize="20"
-                          FontFamily="Segoe UI">
+                          materialDesign:HintAssist.Hint="Catégorie"
+                          FontFamily="Segoe UI light">
                     <ComboBoxItem>Nom</ComboBoxItem>
                     <ComboBoxItem>Prenom</ComboBoxItem>
                     <ComboBoxItem>Societe</ComboBoxItem>
@@ -72,7 +74,7 @@
                          Margin="40,0,0,0"
                          HorizontalAlignment="Right"
                          FontSize="20"
-                         FontFamily="Segoe UI"
+                         FontFamily="Segoe UI light"
                          materialDesign:HintAssist.Hint="Rechercher"
                          TextChanged="TextBoxRecherche_OnTextChanged"/>
             </StackPanel>
