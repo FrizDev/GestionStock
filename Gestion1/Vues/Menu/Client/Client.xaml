@@ -83,13 +83,15 @@
               HorizontalAlignment="Right"
               Margin="0,0,20,200">
             <DataGrid x:Name="DataGridClient"
-                      Height="Auto"/>
+                      Height="Auto"
+                      IsReadOnly="True"
+                      SelectionChanged="DataGridClient_OnSelectionChanged"/>
         </Grid>
-        <Grid Height="500"
-              Width="600"
+        <Grid Height="450"
+              Width="350"
               VerticalAlignment="Bottom"
               HorizontalAlignment="Left"
-              Margin="40,0,0,200">
+              Margin="40,0,0,250">
             <StackPanel>
                 <TextBox x:Name="TextBoxNom"
                          materialDesign:HintAssist.Hint="Nom"
@@ -132,6 +134,15 @@
                          FontSize="17"
                          FontFamily="Segoe UI"/>
             </StackPanel>
+            <Button x:Name="ButtonRaz"
+                    Content="Remise à zéro"
+                    Height="60"
+                    Width="150"
+                    Margin="0,350,0,0"
+                    BorderBrush="{x:Null}"
+                    FontSize="20"
+                    FontFamily="Segoe UI Light"
+                    Click="ButtonRaz_OnClick"/>
+            </Grid>
         </Grid>
-    </Grid>
 </Page>
