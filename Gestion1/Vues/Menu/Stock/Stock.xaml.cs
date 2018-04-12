@@ -76,11 +76,6 @@ namespace Gestion1.Vues.Menu.Stock
                 {
                     TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
                 }
-
-
-
-
-                // TODO Compteur de produit en stock
             }
         }
 

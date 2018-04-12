@@ -25,7 +25,7 @@ namespace Gestion1.Vues.Menu.Vente
         public Vente()
         {
             InitializeComponent();
-            FillListBox();
+            FillDataGrid();
             DatePickerFacture.DisplayDate = DateTime.Today;
         }
 
@@ -37,63 +37,39 @@ namespace Gestion1.Vues.Menu.Vente
 
         #endregion
 
-        private void FillListBox()
+        private void FillDataGrid()
         {
             string CmdString = string.Empty;
             using (SqlConnection con = new SqlConnection(ConString))
             {
                 CmdString =
-                    "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Produits
+                    "SELECT Societe, Prenom, Nom, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Produits
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sda.Fill(dataSet, "Client"); // Remplissage du SQL Data Adapter par la table Client
-                DataTable dataTable = dataSet.Tables[0];
-                DataRow tempRow = null;
-
-                foreach (DataRow tempRow_Variable in dataSet.Tables[0].Rows)
-                {
-                    tempRow = tempRow_Variable;
-                    string Nom = tempRow["Nom"].ToString();
-                    string Prenom = tempRow["Prenom"].ToString();
-                    string Societe = tempRow["Societe"].ToString();
-                    ListBoxClient.Items.Add("[" + Societe + "]" + " " + Nom.ToUpper() + " " + Prenom);
-
-                }
+                DataTable dt = new DataTable("Ventes");
+                sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
+                DatagridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
             }
         }
 
         private void TextBoxRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ListBoxClient.Items.Clear();
-            string CmdString = string.Empty;
-            using (SqlConnection con = new SqlConnection(ConString))
+            if (TextBoxClientNom.Text == "")
             {
-                CmdString = "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
-                        TextBoxRecherche.Text + "%'";
-                SqlCommand cmd = new SqlCommand(CmdString, con);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                sda.Fill(dataSet, "Client"); // Remplissage du SQL Data Adapter par la table Client
-                DataTable dataTable = dataSet.Tables[0];
-                DataRow tempRow = null;
-
-                foreach (DataRow tempRow_Variable in dataSet.Tables[0].Rows)
-                {
-                    tempRow = tempRow_Variable;
-                    string Nom = tempRow["Nom"].ToString();
-                    string Prenom = tempRow["Prenom"].ToString();
-                    string Societe = tempRow["Societe"].ToString();
-                    ListBoxClient.Items.Add("[" + Societe + "]" + " " + Nom.ToUpper() + " " + Prenom);
-
-                }
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT Societe, Nom, Prenom, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '%" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Produits");
+                sda.Fill(dt);
+                DatagridClient.ItemsSource = dt.DefaultView;
             }
         }
 
-        private void ListBoxClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DatagridClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListBox lb = (ListBox)sender;
-            if (lb.SelectedItem is DataRow rowSelected)
+            DataGrid gd = (DataGrid)sender;
+            if (gd.SelectedItem is DataRowView rowSelected)
             {
                 TextBoxClientNom.Text = rowSelected["Nom"].ToString();
                 TextBoxClientPrenom.Text = rowSelected["Prenom"].ToString();

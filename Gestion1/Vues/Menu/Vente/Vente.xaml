@@ -50,7 +50,7 @@
               Width="400"
               HorizontalAlignment="Center"
               VerticalAlignment="Top"
-              Margin="0 60 0 0">
+              Margin="0 60 150 0">
             <StackPanel>
                 <TextBlock x:Name="TextBlockClient"
                            Text="Client :"
@@ -114,7 +114,7 @@
                       RowHeight="60"/>
         </Grid>
         <Grid Height="700"
-              Width="500"
+              Width="530"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
               Margin="0 60 10 0">
@@ -128,13 +128,13 @@
                      VerticalAlignment="Top"
                      Margin="0 30 0 0"
                      TextChanged="TextBoxRecherche_TextChanged"/>
-            <ListBox x:Name="ListBoxClient"
-                     Height="630"
-                     Width="Auto"
-                     VerticalAlignment="Bottom"
-                     FontSize="17"
-                     FontFamily="Segoe UI light"
-                     SelectionChanged="ListBoxClient_SelectionChanged"/>
+            <DataGrid x:Name="DatagridClient"
+                      Height="630"
+                      Width="Auto"
+                      VerticalAlignment="Bottom"
+                      FontSize="17"
+                      FontFamily="Segoe UI light"
+                      SelectionChanged="DatagridClient_SelectionChanged"/>
         </Grid>
     </Grid>
 </Page>
