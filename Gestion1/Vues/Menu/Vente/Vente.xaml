@@ -47,10 +47,10 @@
             </StackPanel>
         </Grid>
         <Grid Height="Auto"
-              Width="Auto"
-              HorizontalAlignment="Right"
+              Width="400"
+              HorizontalAlignment="Center"
               VerticalAlignment="Top"
-              Margin="0 60 400 0">
+              Margin="0 60 0 0">
             <StackPanel>
                 <TextBlock x:Name="TextBlockClient"
                            Text="Client :"
@@ -78,6 +78,12 @@
                          FontSize="17"
                          Margin="0 25 0 0"
                          materialDesign:HintAssist.Hint="Société"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                <TextBlock x:Name="TextBlockVide"
+                           FontSize="17"
+                           FontFamily="Segoe UI Light"
+                           Foreground="Gray"/>
                 <TextBox x:Name="TextBoxClientTelephone"
                          Height="35"
                          Width="160"
@@ -104,16 +110,31 @@
                       VerticalAlignment="Top"
                       IsReadOnly="True"
                       SelectionMode="Single"
-                      SelectionChanged="DataGridVente_SelectionChanged"
                       Background="Transparent"
                       RowHeight="60"/>
         </Grid>
-        <Grid Height="500"
-              Width="350"
+        <Grid Height="700"
+              Width="500"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
               Margin="0 60 10 0">
-
+            <TextBox x:Name="TextBoxRecherche"
+                     Height="35"
+                     Width="300"
+                     materialDesign:HintAssist.Hint="Rechercher"
+                     FontSize="20"
+                     FontFamily="Segoe UI light"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0 30 0 0"
+                     TextChanged="TextBoxRecherche_TextChanged"/>
+            <ListBox x:Name="ListBoxClient"
+                     Height="630"
+                     Width="Auto"
+                     VerticalAlignment="Bottom"
+                     FontSize="17"
+                     FontFamily="Segoe UI light"
+                     SelectionChanged="ListBoxClient_SelectionChanged"/>
         </Grid>
     </Grid>
 </Page>
