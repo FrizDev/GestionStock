@@ -29,7 +29,7 @@
                             VerticalAlignment="Top"
                             FontSize="17"
                             FontFamily="Segoe UI light"
-                            DisplayDate="01/01/2018"
+                          
                             FirstDayOfWeek="Monday"
                             SelectedDateFormat="Short"
                             IsTodayHighlighted="True"/>
@@ -42,19 +42,31 @@
                          materialDesign:HintAssist.Hint="Code produit"
                          FontSize="17"
                          FontFamily="Segoe UI light"/>
-                <ComboBox x:Name="ComboBoxEtat" Height="35"
+                <ComboBox x:Name="ComboBoxEtat" 
+                          Height="35"
                           Width="100"
                           Margin="30 0 0 0"
                           FontSize="17"
-                          FontFamily="Segoe UI light">
-                    <ComboBoxItem>En stock</ComboBoxItem>
-                    <ComboBoxItem>En rupture</ComboBoxItem>
+                          FontFamily="Segoe UI light"
+                          materialDesign:HintAssist.Hint="Etat">
+                    <ComboBoxItem>EnStock</ComboBoxItem>
+                    <ComboBoxItem>EnRupture</ComboBoxItem>
                 </ComboBox>
-                <Button Height="35"
+                <Button x:Name="ButtonAjouter"
+                        Height="35"
                         Width="100"
                         Content="Ajouter"
-                        Margin="30 0 0 0">
-                </Button>
+                        Margin="30 0 0 0"
+                        FontFamily="Segoe UI light"
+                        Click="ButtonAjouter_Click"/>
+                <Button x:Name="ButtonModifier"
+                        Height="35"
+                        Width="100"
+                        Content="Modifier"
+                        FontFamily="Segoe UI light"
+                        Margin="20 0 0 0"
+                        Click="ButtonModifier_Click"/>
+
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Height="35"
@@ -79,10 +91,57 @@
                          materialDesign:HintAssist.Hint="Quantité"
                          FontSize="17"
                          FontFamily="Segoe UI light"/>
-                <Button Height="35"
+                <TextBox x:Name="TextBoxPrixHt"
+                         Height="35"
+                         Width="100"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Left"
+                         Margin="40,0,0,0"
+                         materialDesign:HintAssist.Hint="Prix HT"
+                         FontSize="17"
+                         FontFamily="Segoe UI light"/>
+                <Button x:Name="ButtonSupprimer"
+                        Height="35"
                         Width="100"
                         Content="Supprimer"
-                        Margin="170 0 0 0"></Button>
+                        Margin="30 0 0 0"
+                        FontFamily="Segoe UI light"
+                        Click="ButtonSupprimer_Click"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Height="Auto"
+              Width="600"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0,60,100,0">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom">
+                <ComboBox x:Name="ComboBoxCategorie"
+                          Height="40"
+                          Width="280"
+                          HorizontalAlignment="Left"
+                          IsEditable="True"
+                          FontSize="20"
+                          materialDesign:HintAssist.Hint="Catégorie"
+                          FontFamily="Segoe UI light"
+                          >
+                    <ComboBoxItem>Disque dur et SSD</ComboBoxItem>
+                    <ComboBoxItem>Cartes graphique</ComboBoxItem>
+                    <ComboBoxItem>Processeur</ComboBoxItem>
+                    <ComboBoxItem>Carte mère</ComboBoxItem>
+                    <ComboBoxItem>Barrette mémoire</ComboBoxItem>
+                    <ComboBoxItem>Alimentation</ComboBoxItem>
+                    <ComboBoxItem>Accessoires</ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="TextBoxRecherche"
+                         Height="40"
+                         Width="280"
+                         Margin="40,0,0,0"
+                         HorizontalAlignment="Right"
+                         FontSize="20"
+                         FontFamily="Segoe UI light"
+                         materialDesign:HintAssist.Hint="Rechercher"
+                         TextChanged="TextBoxRecherche_TextChanged"/>
             </StackPanel>
         </Grid>
         <Grid Height="500"
@@ -92,7 +151,8 @@
                       IsReadOnly="True"
                       SelectionMode="Single"
                       SelectionChanged="DataGridStock_OnSelectionChanged"
-                      Background="Transparent"/>
+                      Background="Transparent"
+                      RowHeight="60"/>
         </Grid>
     </Grid>
 </Page>

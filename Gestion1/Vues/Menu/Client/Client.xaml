@@ -104,15 +104,6 @@
               HorizontalAlignment="Left"
               Margin="120,0,0,250">
             <StackPanel>
-                <TextBox x:Name="TextBoxId"
-                         materialDesign:HintAssist.Hint="ID"
-                         Height="Auto"
-                         Width="50"
-                         HorizontalAlignment="Left"
-                         Margin="0 15"
-                         FontSize="17"
-                         FontFamily="Segoe UI"
-                         IsReadOnly="True"/>
                 <TextBox x:Name="TextBoxNom"
                          materialDesign:HintAssist.Hint="Nom"
                          Height="Auto"
@@ -158,7 +149,7 @@
                     Content="Remise à zéro"
                     Height="60"
                     Width="150"
-                    Margin="0,350,0,0"
+                    Margin="0,250,0,0"
                     BorderBrush="{x:Null}"
                     FontSize="20"
                     FontFamily="Segoe UI Light"
