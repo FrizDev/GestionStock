@@ -123,8 +123,7 @@
                           IsEditable="True"
                           FontSize="20"
                           materialDesign:HintAssist.Hint="Catégorie"
-                          FontFamily="Segoe UI light"
-                          >
+                          FontFamily="Segoe UI light">
                     <ComboBoxItem>Disque dur et SSD</ComboBoxItem>
                     <ComboBoxItem>Cartes graphique</ComboBoxItem>
                     <ComboBoxItem>Processeur</ComboBoxItem>
@@ -144,15 +143,26 @@
                          TextChanged="TextBoxRecherche_TextChanged"/>
             </StackPanel>
         </Grid>
-        <Grid Height="500"
+        <Grid Height="680"
+              VerticalAlignment="Top"
+              Margin="0 180 0 0"
               Width="Auto">
             <DataGrid x:Name="DataGridStock"
-                      Height="500"
+                      Height="630"
+                      VerticalAlignment="Top"
                       IsReadOnly="True"
                       SelectionMode="Single"
                       SelectionChanged="DataGridStock_OnSelectionChanged"
                       Background="Transparent"
                       RowHeight="60"/>
+            <TextBlock x:Name="TextBlockTotal"
+                       Text=""
+                       FontSize="20"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontFamily="Segoe UI"
+                       Margin="0,0,0,15"/>
         </Grid>
     </Grid>
 </Page>

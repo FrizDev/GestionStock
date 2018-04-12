@@ -32,6 +32,7 @@ namespace Gestion1.Vues.Menu.Client
             DataGrid gd = (DataGrid)sender;
             if (gd.SelectedItem is DataRowView rowSelected)
             {
+                TextBoxId.Text = rowSelected["Id"].ToString();
                 TextBoxNom.Text = rowSelected["Nom"].ToString();
                 TextBoxPrenom.Text = rowSelected["Prenom"].ToString();
                 TextBoxSociete.Text = rowSelected["Societe"].ToString();
@@ -166,7 +167,7 @@ namespace Gestion1.Vues.Menu.Client
             using (SqlConnection con = new SqlConnection(ConString))
             {
                 CmdString =
-                    "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Clients
+                    "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Clients
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Clients");
@@ -194,7 +195,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -205,7 +206,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -216,7 +217,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -227,7 +228,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
@@ -238,7 +239,7 @@ namespace Gestion1.Vues.Menu.Client
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
+                        "SELECT Id, Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);

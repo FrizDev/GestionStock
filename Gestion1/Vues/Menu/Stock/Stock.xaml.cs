@@ -64,14 +64,20 @@ namespace Gestion1.Vues.Menu.Stock
                 sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
                 DataGridStock.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
                 int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de produits
-                //if (i > 1)
-                //{
-                //    TextBlockTotal.Text = "" + i.ToString() + " clients trouvés";
-                //}
-                //else
-                //{
-                //    TextBlockTotal.Text = "" + i.ToString() + " client trouvé";
-                //}
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produits trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produit trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
+                }
+
+
 
 
                 // TODO Compteur de produit en stock
@@ -153,6 +159,32 @@ namespace Gestion1.Vues.Menu.Stock
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
             }
+
+            #endregion
+
+            #region Recherche par NomProduit
+            if (ComboBoxCategorie.Text == "")
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Produits");
+                sda.Fill(dt);
+                DataGridStock.ItemsSource = dt.DefaultView;
+            }
+
+            else
+            {
+                SqlDataAdapter sda =
+                    new SqlDataAdapter(
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        TextBoxRecherche.Text + "%'", ConString);
+                DataTable dt = new DataTable("Produits");
+                sda.Fill(dt);
+                DataGridStock.ItemsSource = dt.DefaultView;
+            }
+
             #endregion
 
             #region Disque dur et SSD
@@ -160,7 +192,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND CodeProduit LIKE '%" +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND NomProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -171,7 +203,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND NomProduit LIKE '%" +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -185,7 +217,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='GPU' AND CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='GPU' AND NomProduit LIKE " +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -196,7 +228,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='GPU' AND NomProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='GPU' AND CodeProduit LIKE " +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -211,7 +243,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='CPU' AND NomProduit LIKE " +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -222,62 +254,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Quantite LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE PrixHt LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Etat LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE DateAjout LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='CPU' AND CodeProduit LIKE " +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -290,7 +267,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='MoBo' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -301,67 +278,13 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='MoBo' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
             }
 
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Quantite LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE PrixHt LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Etat LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE DateAjout LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
             #endregion
 
             #region Barrette mémoire
@@ -369,7 +292,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='RAM' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -380,67 +303,13 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='RAM' AND NomProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
             }
 
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Quantite LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE PrixHt LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Etat LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE DateAjout LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
             #endregion
 
             #region Alimentation
@@ -448,7 +317,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ALIM' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -459,67 +328,13 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ALIM' AND NomProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
             }
 
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Quantite LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE PrixHt LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Etat LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE DateAjout LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
             #endregion
 
             #region Accessoires
@@ -527,7 +342,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE CodeProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ACC' AND CodeProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -538,67 +353,13 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE NomProduit LIKE '%" +
+                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ACC' AND NomProduit LIKE '%" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
             }
 
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Quantite LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE PrixHt LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Etat LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE DateAjout LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
             #endregion
         }
         #endregion
