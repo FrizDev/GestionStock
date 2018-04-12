@@ -8,8 +8,7 @@
       mc:Ignorable="d" 
       Height="860"
       Width="1540"
-      Title="Client"
-      Background="White">
+      Title="Client">
 
     <Grid>
         <Grid Height="100"

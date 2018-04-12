@@ -192,18 +192,19 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND NomProduit LIKE '%" +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND NomProduit LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
+
             }
 
             if (ComboBoxCategorie.Text == "Disque dur et SSD")
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND CodeProduit LIKE '%" +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND CodeProduit LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -217,7 +218,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='GPU' AND NomProduit LIKE " +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie = 'GPU' AND NomProduit LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -228,7 +229,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='GPU' AND CodeProduit LIKE " +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie = 'GPU' AND CodeProduit LIKE '" +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
@@ -243,7 +244,7 @@ namespace Gestion1.Vues.Menu.Stock
             {
                 SqlDataAdapter sda =
                     new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='CPU' AND NomProduit LIKE " +
+                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='CPU' AND NomProduit LIKE " +
                         TextBoxRecherche.Text + "%'", ConString);
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);

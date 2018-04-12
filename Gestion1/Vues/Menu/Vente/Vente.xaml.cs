@@ -24,5 +24,10 @@ namespace Gestion1.Vues.Menu.Vente
         {
             InitializeComponent();
         }
+
+        private void DataGridVente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Gestion1.Vues.Menu.Vente"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       Height="860"
       Width="1540"
@@ -11,6 +12,108 @@
       Background="White">
 
     <Grid>
+        <Grid Height="Auto"
+              Width="Auto"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
+              Margin="100 60 0 0">
+            <StackPanel>
+                <TextBlock x:Name="TextBlockDetailsFacture"
+                           Text="Détails de facture :"
+                           FontSize="17"
+                           FontFamily="Segoe UI Light"
+                           Foreground="Gray"/>
+                <TextBox x:Name="TextBoxNumeroFacture"
+                         Height="35"
+                         Width="160"
+                         HorizontalAlignment="Left"
+                         Margin="0 25 0 0"
+                         FontSize="17"
+                         materialDesign:HintAssist.Hint="Numéro de facture"/>
+                <TextBox x:Name="RichTextBox"
+                         Height="35"
+                         Width="300"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         Margin="0 25 0 0"
+                         materialDesign:HintAssist.Hint="Description"/>
+                <DatePicker x:Name="DatePickerFacture"
+                            Height="35"
+                            Width="140"
+                            HorizontalAlignment="Left"
+                            FontSize="17"
+                            Margin="0 25 0 0"
+                            materialDesign:HintAssist.Hint="Date de facture"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height="Auto"
+              Width="Auto"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0 60 400 0">
+            <StackPanel>
+                <TextBlock x:Name="TextBlockClient"
+                           Text="Client :"
+                           FontSize="17"
+                           FontFamily="Segoe UI Light"
+                           Foreground="Gray"/>
+                <TextBox x:Name="TextBoxClientNom"
+                         Height="35"
+                         Width="160"
+                         Margin="0 25 0 0"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         materialDesign:HintAssist.Hint="Nom"/>
+                <TextBox x:Name="TextBoxClientPrenom"
+                         Height="35"
+                         Width="160"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         Margin="0 25 0 0"
+                         materialDesign:HintAssist.Hint="Prénom"/>
+                <TextBox x:Name="TextBoxClientSociété"
+                         Height="35"
+                         Width="160"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         Margin="0 25 0 0"
+                         materialDesign:HintAssist.Hint="Société"/>
+                <TextBox x:Name="TextBoxClientTelephone"
+                         Height="35"
+                         Width="160"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         Margin="0 25 0 0"
+                         materialDesign:HintAssist.Hint="Téléphone"/>
+                <TextBox x:Name="TextBoxClientEmail"
+                         Height="35"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         FontSize="17"
+                         Margin="0 25 0 0"
+                         materialDesign:HintAssist.Hint="Email"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height="450"
+              Width="700"
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left"
+              Margin="100 0 0 100">
+            <DataGrid x:Name="DataGridVente"
+                      Height="450"
+                      VerticalAlignment="Top"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionChanged="DataGridVente_SelectionChanged"
+                      Background="Transparent"
+                      RowHeight="60"/>
+        </Grid>
+        <Grid Height="500"
+              Width="350"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0 60 10 0">
 
+        </Grid>
     </Grid>
 </Page>
