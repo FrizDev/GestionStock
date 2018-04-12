@@ -122,6 +122,7 @@ namespace Gestion1.Vues.Menu.Stock
         }
 
         #region Barre de recherche
+
         private void TextBoxRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             #region Remise à zéro de la recherche
@@ -167,6 +168,19 @@ namespace Gestion1.Vues.Menu.Stock
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de produits
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " produits trouvés";
+                }
+                if (i == 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " produit trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
+                }
             }
 
             else
@@ -178,186 +192,220 @@ namespace Gestion1.Vues.Menu.Stock
                 DataTable dt = new DataTable("Produits");
                 sda.Fill(dt);
                 DataGridStock.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de produits
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produits trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produit trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
+                }
             }
 
             #endregion
 
-            #region Disque dur et SSD
-            if (ComboBoxCategorie.Text == "Disque dur et SSD")
+            switch (ComboBoxCategorie.Text)
             {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND NomProduit LIKE '" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
+                case "Disque dur et SSD":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD') AND NomProduit LIKE'" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de Disque dur et SSD
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " disques durs ou SSD trouvés";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " disque dur ou SSD trouvé";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucun disque dur ou SSD n'a été trouvé";
+                    }
+
+                    break;
+                }
+                case "Carte graphique":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='GPU') AND NomProduit LIKE'%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " cartes graphiques trouvées";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " carte graphique trouvée";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucune carte graphique n'a été trouvée";
+                    }
+
+                    break;
+                }
+                case "Processeur":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie ='CPU') AND NomProduit LIKE '%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    var i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " processeurs trouvés";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " processeur trouvé";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucun processeur n'a été trouvé";
+                    }
+
+                    break;
+                }
+                case "Carte mère":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='MoBo') AND NomProduit LIKE '%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    var i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " cartes mères trouvées";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " carte mère trouvé";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucune carte mère n'a été trouvée";
+                    }
+
+                    break;
+                }
+                case "Barrette mémoire":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='RAM') AND NomProduit LIKE '%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    var i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " barrettes mémoires trouvées";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " barrette mémoire trouvée";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucune barrette mémoire n'a été trouvée";
+                    }
+
+                    break;
+                }
+                case "Alimentation":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='ALIM') AND NomProduit LIKE '%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    var i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " alimentations trouvées";
+                    }
+
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " alimentation trouvée";
+                    }
+
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucune alimentation n'a été trouvée";
+                    }
+
+                    break;
+                }
+                case "Accessoire":
+                {
+                    SqlDataAdapter sda =
+                        new SqlDataAdapter(
+                            "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE (Categorie='ACC') AND NomProduit LIKE '%" +
+                            TextBoxRecherche.Text + "%'", ConString);
+                    DataTable dt = new DataTable("Produits");
+                    sda.Fill(dt);
+                    DataGridStock.ItemsSource = dt.DefaultView;
+                    var i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de carte graphique
+                    if (i > 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " accessoires trouvés";
+                    }
+                    if (i == 1)
+                    {
+                        TextBlockTotal.Text = i.ToString() + " accessoire trouvé";
+                    }
+                    if (i == 0)
+                    {
+                        TextBlockTotal.Text = "Aucun accessoire n'a été trouvée";
+                    }
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
 
             }
-
-            if (ComboBoxCategorie.Text == "Disque dur et SSD")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='HDD' OR Categorie='SSHD' OR Categorie='SSD' AND CodeProduit LIKE '" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            #endregion
-
-            #region Carte graphique
-            else if (ComboBoxCategorie.Text == "Carte graphique")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie = 'GPU' AND NomProduit LIKE '" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte graphique")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie = 'GPU' AND CodeProduit LIKE '" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-
-            #endregion
-
-            #region Processeur
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie ='CPU' AND NomProduit LIKE " +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Processeur")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='CPU' AND CodeProduit LIKE " +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-            #endregion
-
-            #region Carte mère
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='MoBo' AND CodeProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Carte mère")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='MoBo' AND CodeProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            #endregion
-
-            #region Barrette mémoire
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='RAM' AND CodeProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Barrette mémoire")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='RAM' AND NomProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            #endregion
-
-            #region Alimentation
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ALIM' AND CodeProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Alimentation")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ALIM' AND NomProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            #endregion
-
-            #region Accessoires
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ACC' AND CodeProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            else if (ComboBoxCategorie.Text == "Accessoires")
-            {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Id, CodeProduit, NomProduit, Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits WHERE Categorie='ACC' AND NomProduit LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DataGridStock.ItemsSource = dt.DefaultView;
-            }
-
-            #endregion
         }
-        #endregion
+
     }
+        #endregion
 }
+

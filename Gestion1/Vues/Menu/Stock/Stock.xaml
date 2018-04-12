@@ -29,7 +29,6 @@
                             VerticalAlignment="Top"
                             FontSize="17"
                             FontFamily="Segoe UI light"
-                          
                             FirstDayOfWeek="Monday"
                             SelectedDateFormat="Short"
                             IsTodayHighlighted="True"/>
@@ -120,17 +119,16 @@
                           Height="40"
                           Width="280"
                           HorizontalAlignment="Left"
-                          IsEditable="True"
                           FontSize="20"
                           materialDesign:HintAssist.Hint="Catégorie"
                           FontFamily="Segoe UI light">
                     <ComboBoxItem>Disque dur et SSD</ComboBoxItem>
-                    <ComboBoxItem>Cartes graphique</ComboBoxItem>
+                    <ComboBoxItem>Carte graphique</ComboBoxItem>
                     <ComboBoxItem>Processeur</ComboBoxItem>
                     <ComboBoxItem>Carte mère</ComboBoxItem>
                     <ComboBoxItem>Barrette mémoire</ComboBoxItem>
                     <ComboBoxItem>Alimentation</ComboBoxItem>
-                    <ComboBoxItem>Accessoires</ComboBoxItem>
+                    <ComboBoxItem>Accessoire</ComboBoxItem>
                 </ComboBox>
                 <TextBox x:Name="TextBoxRecherche"
                          Height="40"
