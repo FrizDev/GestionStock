@@ -178,9 +178,13 @@ namespace Gestion1.Vues.Menu.Client
                 {
                     TextBlockTotal.Text = "" + i.ToString() + " clients trouvés";
                 }
-                else
+                if (i < 1)
                 {
                     TextBlockTotal.Text = "" + i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a pu être trouvé";
                 }
             }
         }
