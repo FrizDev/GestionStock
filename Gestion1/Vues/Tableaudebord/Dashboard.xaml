@@ -60,10 +60,15 @@
               VerticalAlignment="Top"
               Background="#0091EA"
               MouseDown="GridWindow_OnMouseDown">
-            <TextBlock Text=""
+            <TextBlock x:Name="TextBlockTitreFenetre"
+                       Text=""
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       FontSize="22"/>
+                       FontSize="24"
+                       Width="Auto"
+                       Height="Auto"
+                       Foreground="White"
+                       FontFamily="Segoe UI light"/>
             <Button x:Name="ButtonCloseWindow"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"

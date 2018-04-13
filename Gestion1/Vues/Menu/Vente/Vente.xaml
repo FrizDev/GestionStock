@@ -30,7 +30,7 @@
                          Margin="0 25 0 0"
                          FontSize="17"
                          materialDesign:HintAssist.Hint="Numéro de facture"/>
-                <TextBox x:Name="RichTextBox"
+                <TextBox x:Name="TextBoxDescription"
                          Height="35"
                          Width="300"
                          HorizontalAlignment="Left"
@@ -199,7 +199,8 @@
                       Height="450"
                       Width="500"
                       HorizontalAlignment="Right"
-                      VerticalAlignment="Top"/>
+                      VerticalAlignment="Top"
+                      Background="Transparent"/>
         </Grid>
         <Grid Height="780"
               Width="530"

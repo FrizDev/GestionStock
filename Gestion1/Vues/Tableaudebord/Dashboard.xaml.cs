@@ -23,12 +23,14 @@ namespace Gestion1.Vues.Tableaudebord
         public Dashboard()
         {
             InitializeComponent();
+
         }
 
         #region Chargement de la fenêtre
         private void Dashboard_OnLoaded(object sender, RoutedEventArgs e) // Action au chargement de la fenêtre
         {
             MainFrame.Content = new Menu.Accueil.Accueil(); // La page Accueil devient le contenu de la frame MainFrame
+            TextBlockTitreFenetre.Text = "ERPmini";
         }
         #endregion
 
@@ -84,6 +86,8 @@ namespace Gestion1.Vues.Tableaudebord
             MainFrame.Content = new Menu.Accueil.Accueil(); // La page Accueil devient le contenu de la frame MainFrame
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            TextBlockTitreFenetre.Text = "ERPmini - Accueil";
         }
 
         private void MenuStock_OnClick(object sender, MouseButtonEventArgs e)
@@ -91,6 +95,9 @@ namespace Gestion1.Vues.Tableaudebord
             MainFrame.Content = new Menu.Stock.Stock(); // La page Stock devient le contenu de la frame MainFrame
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            TextBlockTitreFenetre.Text = "ERPmini - Gestion du stock";
+
         }
 
         private void MenuVente_OnClick(object sender, MouseButtonEventArgs e)
@@ -98,6 +105,9 @@ namespace Gestion1.Vues.Tableaudebord
             MainFrame.Content = new Menu.Vente.Vente(); // La page Vente devient le contenu de la frame MainFrame
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            TextBlockTitreFenetre.Text = "ERPmini - Gestion des ventes";
+
         }
 
         private void MenuClient_OnClick(object sender, MouseButtonEventArgs e)
@@ -105,6 +115,9 @@ namespace Gestion1.Vues.Tableaudebord
             MainFrame.Content = new Menu.Client.Client(); // La page Client devient le contenu de la frame MainFrame
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            TextBlockTitreFenetre.Text = "ERPmini - Gestion des clients";
+
         }
 
         private void MenuStatistiques_OnClick(object sender, MouseButtonEventArgs e)
@@ -112,6 +125,9 @@ namespace Gestion1.Vues.Tableaudebord
             MainFrame.Content = new Menu.Statistiques.Statistiques(); // La page Statistiques devient le contenu de la frame MainFrame
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            TextBlockTitreFenetre.Text = "ERPmini - Statistiques";
+
         }
         #endregion
     }
