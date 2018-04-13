@@ -12,7 +12,7 @@
       Background="White">
 
     <Grid>
-        <Grid Height="Auto"
+        <Grid Height="120"
               Width="Auto"
               HorizontalAlignment="Left"
               VerticalAlignment="Top"
@@ -107,6 +107,29 @@
                         FontFamily="Segoe UI light"
                         Click="ButtonSupprimer_Click"></Button>
             </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Height="35"
+                        Width="Auto"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="0,40,0,0">
+                <ComboBox x:Name="ComboBoxCategorie"
+                          Height="35"
+                          Width="250"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          FontSize="17"
+                          materialDesign:HintAssist.Hint="Catégorie"
+                          FontFamily="Segoe UI light">
+                    <ComboBoxItem>Disque dur et SSD</ComboBoxItem>
+                    <ComboBoxItem>Carte graphique</ComboBoxItem>
+                    <ComboBoxItem>Processeur</ComboBoxItem>
+                    <ComboBoxItem>Carte mère</ComboBoxItem>
+                    <ComboBoxItem>Barrette mémoire</ComboBoxItem>
+                    <ComboBoxItem>Alimentation</ComboBoxItem>
+                    <ComboBoxItem>Accessoire</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
         </Grid>
         <Grid Height="Auto"
               Width="600"
@@ -115,7 +138,7 @@
               Margin="0,60,100,0">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom">
-                <ComboBox x:Name="ComboBoxCategorie"
+                <ComboBox x:Name="ComboBoxRechercheCategorie"
                           Height="40"
                           Width="280"
                           HorizontalAlignment="Left"

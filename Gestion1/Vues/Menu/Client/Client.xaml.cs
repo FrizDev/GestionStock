@@ -92,7 +92,7 @@ namespace Gestion1.Vues.Menu.Client
                         "DELETE FROM dbo.Clients WHERE Id=@Id",
                         connection); // Requête de suppression du client
                 cmdSqlCommand.Parameters.AddWithValue("@Id", TextBoxId.Text); // Paramètre de l'Email du client
-                if (MessageBox.Show("Oui ou Non", "Êtes vous sûr de vouloir supprimer ce client?", MessageBoxButton.YesNo,
+                if (MessageBox.Show("Oui ou Non", "Êtes vous sûr de vouloir supprimer ce client ?", MessageBoxButton.YesNo,
                         MessageBoxImage.Question) == MessageBoxResult.Yes) // Boite de dialogue demandant la confirmation pour la suppression du client
                 {
                     cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
