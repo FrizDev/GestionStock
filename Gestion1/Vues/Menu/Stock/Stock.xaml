@@ -171,12 +171,15 @@
                          TextChanged="TextBoxRecherche_TextChanged"/>
             </StackPanel>
         </Grid>
-        <Grid Height="680"
-              VerticalAlignment="Top"
-              Margin="0 180 0 0"
+        <Grid Height="620"
+              VerticalAlignment="Bottom"
               Width="Auto">
+            <Rectangle Fill="LightGray"
+                   Height="2"
+                   Width="Auto"
+                   VerticalAlignment="Top"/>
             <DataGrid x:Name="DataGridStock"
-                      Height="630"
+                      Height="580"
                       VerticalAlignment="Top"
                       IsReadOnly="True"
                       SelectionMode="Single"

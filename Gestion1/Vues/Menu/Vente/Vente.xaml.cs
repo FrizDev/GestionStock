@@ -48,7 +48,11 @@ namespace Gestion1.Vues.Menu.Vente
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
-                DataGridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
+                DataGridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique*
+                if (DataGridClient.Columns.Count > 0)
+                {
+                    DataGridClient.Columns[0].Visibility = Visibility.Collapsed;
+                }
                 int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
                 if (i > 1)
                 {
@@ -211,7 +215,7 @@ namespace Gestion1.Vues.Menu.Vente
             #endregion
         }
 
-        private void DatagridClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DataGridClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid gd = (DataGrid)sender;
             if (gd.SelectedItem is DataRowView rowSelected)
@@ -222,6 +226,11 @@ namespace Gestion1.Vues.Menu.Vente
                 TextBoxClientTelephone.Text = rowSelected["Telephone"].ToString();
                 TextBoxClientEmail.Text = rowSelected["Email"].ToString();
             }
+        }
+
+        private void ButtonAjouterFacture_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
