@@ -105,7 +105,14 @@
                         Content="Supprimer"
                         Margin="30 0 0 0"
                         FontFamily="Segoe UI light"
-                        Click="ButtonSupprimer_Click"></Button>
+                        Click="ButtonSupprimer_Click"/>
+                <Button x:Name="ButtonRaz"
+                        Height="35"
+                        Width="100"
+                        Content="Réinitialiser"
+                        Margin="20 0 0 0"
+                        FontFamily="Segoe UI light"
+                        Click="ButtonRaz_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Height="35"

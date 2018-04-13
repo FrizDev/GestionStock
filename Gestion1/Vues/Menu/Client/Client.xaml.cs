@@ -204,6 +204,19 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
 
             else if (ComboBoxCategorie.Text == "Prenom")
@@ -215,6 +228,19 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
 
             else if (ComboBoxCategorie.Text == "Societe")
@@ -226,6 +252,19 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
 
             else if (ComboBoxCategorie.Text == "Telephone")
@@ -237,6 +276,19 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
 
             else if (ComboBoxCategorie.Text == "Email")
@@ -248,6 +300,19 @@ namespace Gestion1.Vues.Menu.Client
                 DataTable dt = new DataTable("Clients");
                 sda.Fill(dt);
                 DataGridClient.ItemsSource = dt.DefaultView;
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
         }
 
