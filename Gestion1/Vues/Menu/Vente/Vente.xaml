@@ -113,28 +113,52 @@
                       Background="Transparent"
                       RowHeight="60"/>
         </Grid>
-        <Grid Height="700"
+        <Grid Height="780"
               Width="530"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
               Margin="0 60 10 0">
+            <ComboBox x:Name="ComboBoxRechercheCategorie"
+                      Height="40"
+                      Width="200"
+                      materialDesign:HintAssist.Hint="Catégorie"
+                      FontSize="20"
+                      FontFamily="Segoe UI light"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="30 30 0 0">
+                <ComboBoxItem>Nom</ComboBoxItem>
+                <ComboBoxItem>Prenom</ComboBoxItem>
+                <ComboBoxItem>Societe</ComboBoxItem>
+                <ComboBoxItem>Telephone</ComboBoxItem>
+                <ComboBoxItem>Email</ComboBoxItem>
+            </ComboBox>
             <TextBox x:Name="TextBoxRecherche"
-                     Height="35"
-                     Width="300"
+                     Height="40"
+                     Width="200"
                      materialDesign:HintAssist.Hint="Rechercher"
                      FontSize="20"
                      FontFamily="Segoe UI light"
-                     HorizontalAlignment="Center"
+                     HorizontalAlignment="Right"
                      VerticalAlignment="Top"
-                     Margin="0 30 0 0"
+                     Margin="0 30 30 0"
                      TextChanged="TextBoxRecherche_TextChanged"/>
-            <DataGrid x:Name="DatagridClient"
+            <DataGrid x:Name="DataGridClient"
                       Height="630"
                       Width="Auto"
-                      VerticalAlignment="Bottom"
+                      VerticalAlignment="Top"
+                      Margin="0 100 0 0"
                       FontSize="17"
                       FontFamily="Segoe UI light"
+                      Background="Transparent"
                       SelectionChanged="DatagridClient_SelectionChanged"/>
+            <TextBlock x:Name="TextBlockTotal"
+                       Text=""
+                       FontSize="20"
+                       Foreground="Gray"
+                       FontFamily="Segoe UI Light"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"/>
         </Grid>
     </Grid>
 </Page>

@@ -310,7 +310,7 @@ namespace Gestion1.Vues.Menu.Stock
                         DataTable dt = new DataTable("Produits");
                         sda.Fill(dt);
                         DataGridStock.ItemsSource = dt.DefaultView;
-                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de Disque dur et SSD
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de disque dur et SSD
                         if (i > 1)
                         {
                             TextBlockTotal.Text = i.ToString() + " disques durs ou SSD trouvés";

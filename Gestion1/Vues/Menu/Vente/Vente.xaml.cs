@@ -46,24 +46,169 @@ namespace Gestion1.Vues.Menu.Vente
                     "SELECT Societe, Prenom, Nom, Telephone, Email FROM dbo.Clients"; // Requête de récupération des éléments de la table Produits
                 SqlCommand cmd = new SqlCommand(CmdString, con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable("Ventes");
+                DataTable dt = new DataTable("Clients");
                 sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
-                DatagridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
+                DataGridClient.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                }
+                if (i == 1)
+                {
+                    TextBlockTotal.Text = i.ToString() + " client trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                }
             }
         }
 
         private void TextBoxRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (TextBoxClientNom.Text == "")
+            #region Remise à zéro de la recherche
+            if (TextBoxRecherche.Text == "")
             {
-                SqlDataAdapter sda =
-                    new SqlDataAdapter(
-                        "SELECT Societe, Nom, Prenom, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '%" +
-                        TextBoxRecherche.Text + "%'", ConString);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt);
-                DatagridClient.ItemsSource = dt.DefaultView;
+                ComboBoxRechercheCategorie.SelectedIndex = -1;
+                FillDataGrid();
             }
+            #endregion
+
+            #region Recherche avec filtre ComboBox
+
+            switch (ComboBoxRechercheCategorie.Text)
+            {
+                case "Nom":
+                    {
+                        SqlDataAdapter sda =
+                            new SqlDataAdapter(
+                                "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Nom LIKE '" +
+                                TextBoxRecherche.Text + "%'", ConString);
+                        DataTable dt = new DataTable("Clients");
+                        sda.Fill(dt);
+                        DataGridClient.ItemsSource = dt.DefaultView;
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                        if (i > 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                        }
+                        if (i == 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " client trouvé";
+                        }
+                        if (i == 0)
+                        {
+                            TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                        }
+                        break;
+                    }
+                case "Prenom":
+                    {
+                        SqlDataAdapter sda =
+                            new SqlDataAdapter(
+                                "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Prenom LIKE '" +
+                                TextBoxRecherche.Text + "%'", ConString);
+                        DataTable dt = new DataTable("Clients");
+                        sda.Fill(dt);
+                        DataGridClient.ItemsSource = dt.DefaultView;
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                        if (i > 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                        }
+                        if (i == 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " client trouvé";
+                        }
+                        if (i == 0)
+                        {
+                            TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                        }
+
+                        break;
+                    }
+
+                case "Societe":
+                    {
+                        SqlDataAdapter sda =
+                            new SqlDataAdapter(
+                                "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Societe LIKE '" +
+                                TextBoxRecherche.Text + "%'", ConString);
+                        DataTable dt = new DataTable("Clients");
+                        sda.Fill(dt);
+                        DataGridClient.ItemsSource = dt.DefaultView;
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                        if (i > 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                        }
+                        if (i == 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " client trouvé";
+                        }
+                        if (i == 0)
+                        {
+                            TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                        }
+
+                        break;
+                    }
+
+                case "Telephone":
+                    {
+                        SqlDataAdapter sda =
+                            new SqlDataAdapter(
+                                "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Telephone LIKE '" +
+                                TextBoxRecherche.Text + "%'", ConString);
+                        DataTable dt = new DataTable("Clients");
+                        sda.Fill(dt);
+                        DataGridClient.ItemsSource = dt.DefaultView;
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                        if (i > 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                        }
+                        if (i == 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " client trouvé";
+                        }
+                        if (i == 0)
+                        {
+                            TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                        }
+
+                        break;
+                    }
+
+                case "Email":
+                    {
+                        SqlDataAdapter sda =
+                            new SqlDataAdapter(
+                                "SELECT Nom, Prenom, Societe, Telephone, Email FROM dbo.Clients WHERE Email LIKE '" +
+                                TextBoxRecherche.Text + "%'", ConString);
+                        DataTable dt = new DataTable("Clients");
+                        sda.Fill(dt);
+                        DataGridClient.ItemsSource = dt.DefaultView;
+                        int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de client
+                        if (i > 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " clients trouvés";
+                        }
+                        if (i == 1)
+                        {
+                            TextBlockTotal.Text = i.ToString() + " client trouvé";
+                        }
+                        if (i == 0)
+                        {
+                            TextBlockTotal.Text = "Aucun client n'a été trouvé";
+                        }
+
+                        break;
+                    }
+            }
+
+            #endregion
         }
 
         private void DatagridClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
