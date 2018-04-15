@@ -81,6 +81,56 @@ namespace Gestion1.Vues.Menu.Vente
             }
         }
 
+        private void FillComboBoxNomProduit()
+        {
+            ComboBoxContenuNomProduit.Items.Clear();
+            string CmdString = string.Empty;
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                CmdString =
+                    "SELECT NomProduit, CodeProduit, PrixHt, Quantite  FROM dbo.Produits"; // Requête de récupération des éléments de la table Produits
+                SqlCommand cmd = new SqlCommand(CmdString, con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable("Produits");
+                sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ComboBoxContenuNomProduit.Items.Add(dr["NomProduit"].ToString());
+                    TextBoxContenuCodeProduit.Text = dr["CodeProduit"].ToString();
+                    TextBoxContenuPrixUnitaire.Text = dr["PrixHt"].ToString();
+                    TextBoxContenuQuantite.Text = dr["Quantite"].ToString();
+                }
+
+                //CmdString2 = "SELECT NomProduit FROM dbo.Produits WHERE NomProduit=@NomProduit";
+                //SqlCommand cmSqlCommand = new SqlCommand(CmdString2, con);
+                //cmSqlCommand.Parameters.AddWithValue("@NomProduit", ComboBoxContenuNomProduit.Text);
+                //SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+                //DataTable dataTable = new DataTable("Produits");
+                //sqlData.Fill(dataTable);
+                //foreach (DataRow dataRow in dataTable.Rows)
+                //{
+                //    TextBoxContenuCodeProduit.Text = dataRow["CodeProduit"].ToString();
+                //}
+            }
+        }
+
+        //private void FillTextBoxCodeProduit()
+        //{
+        //    SqlConnection connection = new SqlConnection(ConString);
+        //    connection.Open(); // Ouvertue de la connexion
+
+        //    SqlCommand cmdSqlCommand =
+        //        new SqlCommand(
+        //            "SELECT CodeProduit FROM dbo.Produits WHERE NomProduit=@NomProduit", connection); // Requête d'insertion d'un nouveau client
+        //    cmdSqlCommand.Parameters.AddWithValue("@NomProduit", ComboBoxContenuNomProduit.Text); // Paramètre du Nom du client
+        //    SqlDataReader dr = cmdSqlCommand.ExecuteReader();
+        //    if (dr.Read())
+        //    {
+        //        TextBoxContenuCodeProduit.Text = (dr["CodeProduit"].ToString());
+        //    }
+
+        //}
+
         private void TextBoxRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             #region Remise à zéro de la recherche
@@ -242,10 +292,10 @@ namespace Gestion1.Vues.Menu.Vente
 
         private void ButtonAjouterFacture_Click(object sender, RoutedEventArgs e)
         {
-            if (DatePickerFacture.Text != "" & TextBoxNumeroFacture.Text != "" & TextBoxDescription.Text != "" &
-                TextBoxClientNom.Text != "" & TextBoxClientPrenom.Text != "" & TextBoxClientSociété.Text != "" &
-                TextBoxClientTelephone.Text != "" & TextBoxClientEmail.Text != "" & ComboBoxContenuCodeProduit.Text != "" &
-                ComboBoxContenuNomProduit.Text != "" & ComboBoxContenuQuantite.Text != "" & TextBoxContenuPrixnitaire.Text != "") // Si les champs ne sont pas vides, la création est impossible
+            //if (DatePickerFacture.Text != "" & TextBoxNumeroFacture.Text != "" & TextBoxDescription.Text != "" &
+            //    TextBoxClientNom.Text != "" & TextBoxClientPrenom.Text != "" & TextBoxClientSociété.Text != "" &
+            //    TextBoxClientTelephone.Text != "" & TextBoxClientEmail.Text != "" & TextBoxContenuCodeProduit.Text != "" &
+            //    ComboBoxContenuNomProduit.Text != "" & TextBoxContenuQuantite.Text != "" & TextBoxContenuPrixUnitaire.Text != "") // Si les champs ne sont pas vides, la création est impossible
             {
                 SqlConnection connection = new SqlConnection(ConString);
                 connection.Open(); // Ouvertue de la connexion
@@ -260,19 +310,24 @@ namespace Gestion1.Vues.Menu.Vente
                 cmdSqlCommand.Parameters.AddWithValue("@Description", TextBoxDescription.Text); // Paramètre du Prenom du client
                 cmdSqlCommand.Parameters.AddWithValue("@DateFacture", Convert.ToDateTime(DatePickerFacture.Text).ToString("yyyy-MM-dd")); // Paramètre du Prenom du client
                 cmdSqlCommand.Parameters.AddWithValue("@NomProduit", ComboBoxContenuNomProduit.Text); // Paramètre de la Societe du client
-                cmdSqlCommand.Parameters.AddWithValue("@CodeProduit", ComboBoxContenuCodeProduit.Text); // Paramètre de la Societe du client
-                cmdSqlCommand.Parameters.AddWithValue("@Quantite", ComboBoxContenuQuantite.Text); // Paramètre du numéro de Telephone du client
-                cmdSqlCommand.Parameters.AddWithValue("@PrixUnitaire", TextBoxContenuPrixnitaire); // Paramètre de l'Email du client
-                cmdSqlCommand.Parameters.AddWithValue("@Nom", TextBoxClientPrenom); // Paramètre de l'Email du client
-                cmdSqlCommand.Parameters.AddWithValue("@Prenom", TextBoxClientPrenom); // Paramètre de l'Email du client
-                cmdSqlCommand.Parameters.AddWithValue("@Societe", TextBoxClientSociété); // Paramètre de l'Email du client
-                cmdSqlCommand.Parameters.AddWithValue("@Telephone", TextBoxClientTelephone); // Paramètre de l'Email du client
-                cmdSqlCommand.Parameters.AddWithValue("@Email", TextBoxClientEmail); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@CodeProduit", TextBoxContenuCodeProduit.Text); // Paramètre de la Societe du client
+                cmdSqlCommand.Parameters.AddWithValue("@Quantite", TextBoxContenuQuantite.Text); // Paramètre du numéro de Telephone du client
+                cmdSqlCommand.Parameters.AddWithValue("@PrixUnitaire", TextBoxContenuPrixUnitaire.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@Nom", TextBoxClientPrenom.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@Prenom", TextBoxClientPrenom.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@Societe", TextBoxClientSociété.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@Telephone", TextBoxClientTelephone.Text); // Paramètre de l'Email du client
+                cmdSqlCommand.Parameters.AddWithValue("@Email", TextBoxClientEmail.Text); // Paramètre de l'Email du client
                 cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
                 MessageBox.Show("Le produit " + ComboBoxContenuNomProduit.Text + " a été ajouté à la facture " + TextBoxNumeroFacture); // Affichage du message après execution de la requête
-                FillDataGrid(); // Recharge la table Clients
+                FillVenteGrid(); // Recharge la table Clients
                 connection.Close(); // Fermeture de la connexion
             }
+        }
+
+        private void ComboBoxContenuNomProduit_OnDropDownOpened(object sender, EventArgs e)
+        {
+            FillComboBoxNomProduit();           
         }
     }
 }
