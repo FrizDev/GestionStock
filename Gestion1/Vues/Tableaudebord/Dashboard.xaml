@@ -215,7 +215,7 @@
                             <TextBlock Text="Gestion des ventes" FontSize="15" VerticalAlignment="Center" Margin="20 10" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" 
+                    <!--<ListViewItem Height="60" 
                               PreviewMouseLeftButtonUp="MenuStatistiques_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ChartAreaspline" 
@@ -226,7 +226,7 @@
                                                  Foreground="White"/>
                             <TextBlock Text="Statistiques" FontSize="15" VerticalAlignment="Center" Margin="20 10" Foreground="White"/>
                         </StackPanel>
-                    </ListViewItem>
+                    </ListViewItem>-->
                 </ListView>
             </StackPanel>
         </Grid>

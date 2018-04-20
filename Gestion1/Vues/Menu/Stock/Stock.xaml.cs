@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestion1.Vues.Menu.Stock
 {
@@ -37,7 +26,37 @@ namespace Gestion1.Vues.Menu.Stock
 
         #endregion
 
-        private void DataGridStock_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        #region Formulaire stock
+
+        private void FillDataGrid() // Remplissage DataGrid Produits
+        {
+            string CmdString = string.Empty;
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                CmdString =
+                    "SELECT CodeProduit, NomProduit,Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits"; // Requête de récupération des éléments de la table Produits
+                SqlCommand cmd = new SqlCommand(CmdString, con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable("Produits");
+                sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
+                DataGridStock.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
+                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de produits
+                if (i > 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produits trouvés";
+                }
+                if (i < 1)
+                {
+                    TextBlockTotal.Text = "" + i.ToString() + " produit trouvé";
+                }
+                if (i == 0)
+                {
+                    TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
+                }
+            }
+        }
+
+        private void DataGridStock_OnSelectionChanged(object sender, SelectionChangedEventArgs e) // Evenement permettant le remplissage des champs en fonction de la ligne selectionnée dans la DataGrid stock
         {
             DataGrid gd = (DataGrid)sender;
             if (gd.SelectedItem is DataRowView rowSelected)
@@ -81,33 +100,9 @@ namespace Gestion1.Vues.Menu.Stock
             }
         }
 
-        private void FillDataGrid()
-        {
-            string CmdString = string.Empty;
-            using (SqlConnection con = new SqlConnection(ConString))
-            {
-                CmdString =
-                    "SELECT CodeProduit, NomProduit,Categorie, Quantite, PrixHt, Etat, DateAjout FROM dbo.Produits"; // Requête de récupération des éléments de la table Produits
-                SqlCommand cmd = new SqlCommand(CmdString, con);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable("Produits");
-                sda.Fill(dt); // Remplissage du SQL Data Adapter par la table Produits
-                DataGridStock.ItemsSource = dt.DefaultView; // Choix du type de vue sur l'interface graphique
-                int i = Convert.ToInt32(dt.Rows.Count); // Compteur du nombre de produits
-                if (i > 1)
-                {
-                    TextBlockTotal.Text = "" + i.ToString() + " produits trouvés";
-                }
-                if (i < 1)
-                {
-                    TextBlockTotal.Text = "" + i.ToString() + " produit trouvé";
-                }
-                if (i == 0)
-                {
-                    TextBlockTotal.Text = "Aucun produit n'a pu être trouvé";
-                }
-            }
-        }
+        #endregion
+
+        #region Boutons
 
         private void ButtonAjouter_Click(object sender, RoutedEventArgs e)
         {
@@ -124,11 +119,34 @@ namespace Gestion1.Vues.Menu.Stock
 
                 cmdSqlCommand.Parameters.AddWithValue("@CodeProduit", TextBoxCodeProduit.Text); // Paramètre du Nom du client
                 cmdSqlCommand.Parameters.AddWithValue("@NomProduit", TextBoxNomProduit.Text); // Paramètre du Prenom du client
-                cmdSqlCommand.Parameters.AddWithValue("@Categorie", ComboBoxCategorie.Text); // Paramètre du Prenom du client
-                cmdSqlCommand.Parameters.AddWithValue("@Quantite", TextBoxQuantite.Text); // Paramètre de la Societe du client
-                cmdSqlCommand.Parameters.AddWithValue("@PrixHt", TextBoxPrixHt.Text); // Paramètre de la Societe du client
-                cmdSqlCommand.Parameters.AddWithValue("@Etat", ComboBoxEtat.Text); // Paramètre du numéro de Telephone du client
-                cmdSqlCommand.Parameters.AddWithValue("@DateAjout", Convert.ToDateTime(DatePickerStock.Text).ToString("yyyy-MM-dd")); // Paramètre de l'Email du client
+                switch (ComboBoxCategorie.Text)
+                {
+                    case "Disque dur et SSD":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "HDD"); // Ajout HDD dans catégorie 
+                        break;
+                    case "Carte graphique":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "GPU"); // Ajout GPU dans catégorie 
+                        break;
+                    case "Processeur":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "CPU"); // Ajout CPU dans catégorie 
+                        break;
+                    case "Carte mère":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "MoBo"); // Ajout MoBo dans catégorie 
+                        break;
+                    case "Barette mémoire":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "RAM"); // Ajout RAM dans catégorie 
+                        break;
+                    case "Alimentatin":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "ALIM"); // Ajout ALIM dans catégorie 
+                        break;
+                    case "Accessoire":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "ACC"); // Ajout ACC dans catégorie 
+                        break;
+                }
+                cmdSqlCommand.Parameters.AddWithValue("@Quantite", TextBoxQuantite.Text); // Paramètre du prix HT du produit
+                cmdSqlCommand.Parameters.AddWithValue("@Prixht", TextBoxPrixHt.Text); // Paramètre du prix HT du produit
+                cmdSqlCommand.Parameters.AddWithValue("@Etat", ComboBoxEtat.Text); // Paramètre de l'etat du produit
+                cmdSqlCommand.Parameters.AddWithValue("@DateAjout", DateTime.Now); // Paramètre de la date d'ajout
                 cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
                 MessageBox.Show("Le produit " + TextBoxNomProduit.Text + " a été ajouté"); // Affichage du message après execution de la requête
                 FillDataGrid(); // Recharge la table Clients
@@ -174,42 +192,76 @@ namespace Gestion1.Vues.Menu.Stock
         private void ButtonModifier_Click(object sender, RoutedEventArgs e)
         {
             if (DatePickerStock.Text != "" & TextBoxCodeProduit.Text != "" & TextBoxNomProduit.Text != "" &
-                TextBoxQuantite.Text != "" & ComboBoxEtat.Text != "" & ComboBoxCategorie.Text != "") // Si les champs sont pas vides, la modification est impossible
+                TextBoxQuantite.Text != "" & ComboBoxEtat.Text != "" &
+                ComboBoxCategorie.Text != "") // Si les champs sont pas vides, la modification est impossible
             {
                 SqlConnection connection = new SqlConnection(ConString);
                 connection.Open(); // Ouvertue de la connexion
                 SqlCommand cmdSqlCommand =
                     new SqlCommand(
-                        "UPDATE dbo.Produits SET NomProduit=@NomProduit, Categorie=@Categorie, PrixHt=@PrixHt, Quantite=@Quantite, Etat=@Etat, DateAjout=@DateAjout WHERE CodeProduit=@CodeProduit",
+                        "UPDATE dbo.Produits SET NomProduit=@NomProduit, Categorie=@Categorie, PrixHt=@PrixHt, Quantite=@Quantite, Etat=@Etat, DateAjout=@DateAjout, CodeProduit=@CodeProduit WHERE CodeProduit=@CodeProduit",
                         connection); // Requête de suppression du client
-                cmdSqlCommand.Parameters.AddWithValue("@NomProduit", TextBoxNomProduit.Text); // Paramètre du Nom du produit
-                cmdSqlCommand.Parameters.AddWithValue("@Categorie", ComboBoxCategorie.Text); // Paramètre de la Catégorie du produit
+                cmdSqlCommand.Parameters.AddWithValue("@NomProduit",
+                    TextBoxNomProduit.Text); // Paramètre du Nom du produit
+                switch (ComboBoxCategorie.Text)
+                {
+                    case "Disque dur et SSD":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "HDD"); // Ajout HDD dans catégorie 
+                        break;
+                    case "Carte graphique":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "GPU"); // Ajout GPU dans catégorie 
+                        break;
+                    case "Processeur":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "CPU"); // Ajout CPU dans catégorie 
+                        break;
+                    case "Carte mère":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "MoBo"); // Ajout MoBo dans catégorie 
+                        break;
+                    case "Barette mémoire":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "RAM"); // Ajout RAM dans catégorie 
+                        break;
+                    case "Alimentatin":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "ALIM"); // Ajout ALIM dans catégorie 
+                        break;
+                    case "Accessoire":
+                        cmdSqlCommand.Parameters.AddWithValue("@Categorie", "ACC"); // Ajout ACC dans catégorie 
+                        break;
+                }
                 cmdSqlCommand.Parameters.AddWithValue("@PrixHt", TextBoxPrixHt.Text); // Paramètre du Prix HT du produit
-                cmdSqlCommand.Parameters.AddWithValue("@Quantite", TextBoxQuantite.Text); // Paramètre du Prix HT du produit
+                cmdSqlCommand.Parameters.AddWithValue("@Quantite",
+                    TextBoxQuantite.Text); // Paramètre du Prix HT du produit
                 cmdSqlCommand.Parameters.AddWithValue("@Etat", ComboBoxEtat.Text); // Paramètre de l'Etat du produit
-                cmdSqlCommand.Parameters.AddWithValue("@DateAjout", Convert.ToDateTime(DatePickerStock.Text).ToString("yyyy-MM-dd")); // Paramètre de la Date d'ajout du produit
-                cmdSqlCommand.Parameters.AddWithValue("@CodeProduit", TextBoxCodeProduit.Text); // Paramètre du Code du produit
+                cmdSqlCommand.Parameters.AddWithValue("@DateAjout", DateTime.Now); // Paramètre de la Date d'ajout du produit
+                cmdSqlCommand.Parameters.AddWithValue("@CodeProduit",
+                    TextBoxCodeProduit.Text); // Paramètre du Code du produit
                 cmdSqlCommand.ExecuteNonQuery(); // Execution de la requête
                 int rows = cmdSqlCommand.ExecuteNonQuery(); // Variable qui stocke le nombre de requêtes effectuées
                 if (rows > 1)
                 {
-                    MessageBox.Show(rows + " requêtes ont bien été effectuées"); // Affichage du message après execution de la requête (dans le cas où il y en a plusieurs)
+                    MessageBox.Show(
+                        rows +
+                        " requêtes ont bien été effectuées"); // Affichage du message après execution de la requête (dans le cas où il y en a plusieurs)
                 }
                 else
                 {
-                    MessageBox.Show(rows + " requête a bien été effectuée"); // Affichage du message après execution de la requête (dans le cas où il n'y en a qu'une seule)
+                    MessageBox.Show(
+                        rows +
+                        " requête a bien été effectuée"); // Affichage du message après execution de la requête (dans le cas où il n'y en a qu'une seule)
                 }
+
                 FillDataGrid(); // Recharge la table Produit
                 TextBoxCodeProduit.Clear(); // Vide le champs Code Produit
                 TextBoxNomProduit.Clear(); // Vide le champs Nom Produit
                 TextBoxPrixHt.Clear(); // Vide le champs Prix HT
                 TextBoxQuantite.Clear(); // Vide le champs Quantite
                 ComboBoxEtat.Text = ""; // Vide la ComboBox Etat
-                DatePickerStock.SelectedDate = DateTime.Today; ; // Remet la date du jour
+                DatePickerStock.SelectedDate = DateTime.Today; // Remet la date du jour
                 TextBoxRecherche.Text = "";
                 connection.Close(); // Fermeture de la connexion
             }
         }
+
+        #endregion
 
         #region Barre de recherche
 
